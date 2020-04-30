@@ -1,0 +1,29 @@
+/* Position Classes */
+.top {
+    top: 0px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.top-right {
+    top: 0px;
+    right: calc(var(--spacing-rem) * 4);
+}
+.top-left {
+    top: 0px;
+    left: calc(var(--spacing-rem) * 4);
+}
+.bottom {
+    bottom: 0px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.bottom-right {
+    bottom: 0px;
+    right: calc(var(--spacing-rem) * 4);
+}
+.bottom-left {
+    bottom: 0px;
+    left: calc(var(--spacing-rem) * 4);
+}

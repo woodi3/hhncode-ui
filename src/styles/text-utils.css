@@ -1,0 +1,33 @@
+/* Text Color Utilities */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+.text-accent {
+    color: var(--accent-color) !important;
+}
+.text-gray {
+    color: var(--gray-color) !important;
+}
+.text-grey {
+    color: var(--gray-color) !important;
+}
+.text-black {
+    color: var(--black-color) !important;
+}
+.text-white {
+    color: var(--white-color) !important;
+}
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+/* Font Size Classes */
+.font-sm {
+    font-size: var(--font-size-sm);
+}
+.font-md {
+    font-size: var(--font-size);
+}
+.font-lg {
+    font-size: var(--font-size-lg);
+}

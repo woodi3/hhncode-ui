@@ -1,0 +1,11 @@
+/* Shadow Classes */
+
+.shadow-reg {
+    box-shadow: 0 calc(var(--spacing-rem) / 2) var(--spacing-rem) 0 var(--shadow-rgb);
+}
+.shadow-sm {
+    box-shadow: 0 calc(var(--spacing-rem) / 4) calc(var(--spacing-rem) / 2) 0 var(--shadow-rgb);
+}
+.shadow-lg {
+    box-shadow: 0 var(--spacing-rem) calc(var(--spacing-rem) * 2) 0 var(--shadow-rgb);
+}

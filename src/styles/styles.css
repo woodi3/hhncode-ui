@@ -1,0 +1,26 @@
+@import "variables.css";
+@import "background.css";
+@import "spacers.css";
+@import "shadow.css";
+@import "text-utils.css";
+@import "border.css";
+@import "display.css";
+@import "position.css";
+@import "toast.css";
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Helvetica Neue, Arial, sans-serif;
+    position: relative;
+}
+
+p {
+    margin: 0px;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

@@ -1,0 +1,38 @@
+:root {
+    --primary-color: #00a96d;
+    --primary-darker-color: #006541;
+    --primary-lighter-color: #66cba7;
+    --primary-rgb-light: rgb(0, 169, 109, .25);
+    --accent-color: #eea222;
+    --accent-darker-color: #8e6114;
+    --accent-lighter-color: #f4c77a;
+    --accent-rgb-light: rgb(238, 162, 34, .25);
+    --gray-color: #c2c2c2;
+    --gray-rgb-light: rgb(194, 194, 194, .25);
+    --gray-darker-color: #747474;
+    --gray-lighter-color: #dadada;
+    --divider-color: rgba(0,0,0,0.08);
+    --danger-color: #ff4444;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --spacing-rem: .25rem;
+    --shadow-rgb: rgba(0,0,0,0.2);
+    --default-spinner-size: 32px;
+    --default-spinner-border-width: 4px;
+    --default-check-height: 24px;
+    --default-check-width: 12px;
+    --default-check-border-width: 7px;
+    --default-avatar-height: 48px;
+    --default-avatar-width: 48px;
+    --table-background-color: #f6f6f6;
+    --input-height: 2.5rem;
+    --font-size: 1rem;
+    --font-size-sm: .85rem;
+    --font-size-lg: 1.25rem;
+    --dialog-md-width: 30rem;
+    --dialog-lg-width: 45rem;
+    --dialog-sm-width: 15rem;
+    --dialog-md-height: 30rem;
+    --dialog-lg-height: 45rem;
+    --dialog-sm-height: 15rem;
+}
