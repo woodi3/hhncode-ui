@@ -51,12 +51,6 @@ export default {
             return this.minChildWidth !== undefined ? this.widthToColumns(this.minChildWidth) : this.countToColumns(this.columns)
         },
         /**
-         * Computed property that appends `px` to a number
-         */
-        px (n) {
-            return typeof n === "number" ? n + "px" : n
-        },
-        /**
          * Computed property that builds a grid spacing object for the grid-spacing attribute
          */
         gridSpacing () {
@@ -124,7 +118,13 @@ export default {
             }
 
             return null
-        }
+        },
+        /**
+         * Computed property that appends `px` to a number
+         */
+        px (n) {
+            return typeof n === "number" ? n + "px" : n
+        },
     }
 }
 </script>

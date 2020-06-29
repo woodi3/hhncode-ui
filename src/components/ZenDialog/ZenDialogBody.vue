@@ -15,6 +15,6 @@ export default {
 </script>
 <style scoped>
 .zen-dialog-body {
-    overflow-y: auto;
+    overflow: auto;
 }
 </style>

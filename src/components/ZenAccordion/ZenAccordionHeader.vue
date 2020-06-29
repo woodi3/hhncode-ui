@@ -3,9 +3,10 @@
         ref="zenAccordionHeader"
         d="flex"
         justifyContent="space-between"
-        alignItems="center">
+        alignItems="center"
+        @click.native="toggle">
         <slot></slot>
-        <v-icon :icon="isOpen ? icons.open : icons.close"/>
+        <v-icon class="text-primary" :icon="isOpen ? icons.open : icons.close"/>
     </zen-box>
 </template>
 
@@ -18,9 +19,6 @@ export default {
         ZenBox
     },
     props: {
-        isOpen: {
-            type: Boolean
-        },
         icons: {
             type: Object,
             required: false,
@@ -30,10 +28,26 @@ export default {
             })
         }
     },
+    data () {
+        return {
+            isOpen: false,
+        }
+    },
+    methods: {
+        toggle () {
+            this.isOpen = !this.isOpen
+            if (this.isOpen) {
+                this.$emit('open')
+            } else {
+                this.$emit('close')
+            }
+        },
+    }
 }
 </script>
 <style scoped>
 .zen-accordion-header {
+    cursor: pointer;
     padding: calc(var(--spacing-rem) * 5);
     border-bottom-style: solid;
     border-bottom-width: 1px;

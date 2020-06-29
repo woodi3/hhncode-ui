@@ -6,6 +6,7 @@
 
 <script>
 
+const NAV_WIDTH_FULL = "100%"
 const NAV_WIDTH = "250px"
 
 export default {
@@ -18,6 +19,17 @@ export default {
             type: String,
             default: `left`
         },
+        overlay: {
+            type: Boolean
+        },
+        full: {
+            type: Boolean
+        }
+    },
+    mounted () {
+        if (this.isOpen) {
+            this.open()
+        }
     },
     computed: {
         /** If drawer should be on the left side */
@@ -53,15 +65,30 @@ export default {
         shiftLeft (content, nav) {
             nav.classList.add('left')
             nav.classList.remove('right')
-            nav.style.width = NAV_WIDTH
-            content.style.marginLeft = NAV_WIDTH
+            if (this.full) {
+                nav.style.width = NAV_WIDTH_FULL
+            }
+            else {
+                nav.style.width = NAV_WIDTH
+            }
+            
+            if (!this.overlay) {
+                content.style.marginLeft = NAV_WIDTH
+            }
         },
         /** Opens the nav on the right side and shifts content to the left */
         shiftRight (content, nav) {
             nav.classList.add('right')
             nav.classList.remove('left')
-            nav.style.width= NAV_WIDTH
-            content.style.marginRight = NAV_WIDTH
+            if (this.full) {
+                nav.style.width = NAV_WIDTH_FULL
+            }
+            else {
+                nav.style.width = NAV_WIDTH
+            }
+            if (!this.overlay) {
+                content.style.marginRight = NAV_WIDTH
+            }
         },
         /** CLoses the drawer nav shifting the content back */
         close () {
@@ -69,12 +96,15 @@ export default {
 
             if (this.hasElements(content, nav)) {
                 nav.style.width = "0"
-                if (this.isLeft) {
-                    content.style.marginLeft = "0"
+                if (!this.overlay) {
+                    if (this.isLeft) {
+                        content.style.marginLeft = "0"
+                    }
+                    else {
+                        content.style.marginRight = "0"
+                    }
                 }
-                else {
-                    content.style.marginRight = "0"
-                }
+                
             }
         }
     },

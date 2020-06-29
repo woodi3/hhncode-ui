@@ -1,5 +1,5 @@
 <template>
-    <div :id="id" :class="classes">
+    <div :id="id" :class="classes" :title="title" :tabindex="tabIndex">
         <slot></slot>
     </div>
 </template>
@@ -42,6 +42,20 @@ export default {
          * Abbreviated for display attribute
          */
         d: {
+            type: String,
+            required: false,
+        },
+        /**
+         * Set the flex property
+         */
+        flex: {
+            type: String,
+            required: false,
+        },
+        /**
+         * Abbreviation for flex
+         */
+        f: {
             type: String,
             required: false,
         },
@@ -297,7 +311,11 @@ export default {
         },
         position: {
             type: String,
-            default: ''
+            default: 'none'
+        },
+        /** If the flex-sm class should be applied */
+        responsive: {
+            type: Boolean,
         },
         /**
          * Represents the size of the shadow.
@@ -322,6 +340,14 @@ export default {
          */
         size: {
             required: false
+        },
+        tabIndex: {
+            required: false,
+            type: String,
+        },
+        title: {
+            required: false,
+            type: String,
         },
         /**
          * Represents the width of the box.
@@ -498,7 +524,7 @@ export default {
                             height
                         }
                     }
-                    else if (height.indexOf("rem") > -1) {
+                    else if (height.indexOf("rem") > -1 || height.indexOf('px') > -1) {
                         return {
                             height
                         }
@@ -530,7 +556,7 @@ export default {
                             width
                         }
                     }
-                    else if (width.indexOf("rem") > -1) {
+                    else if (width.indexOf("rem") > -1 || width.indexOf('px') > -1) {
                         return {
                             width
                         }
@@ -547,8 +573,9 @@ export default {
          */
         flexStyles () {
             const display = this.d || this.display 
+            const flex = {}
             if (display.toLowerCase() === `flex` || display.toLowerCase() === `inline-flex`) {
-                const flex = {}
+                
                 if (this.alignItems !== undefined) {
                     flex.alignItems = this.alignItems
                 }
@@ -561,9 +588,13 @@ export default {
                 if (this.flexDirection !== undefined) {
                     flex.flexDirection = this.flexDirection
                 }
-                return flex
             }
-            return {}
+
+            const f = this.f || this.flex
+            if (f !== undefined) {
+                flex.flex = f
+            }
+            return flex
         },
         /**
          * Computed property to build any grid styles
@@ -648,6 +679,8 @@ export default {
             switch (display.toLowerCase()) {
                 case `block`:
                     return `z-block`
+                case `inline`:
+                    return `z-inline`
                 case `inline-block`:
                     return `z-inline-block`
                 case `flex`:
@@ -684,12 +717,14 @@ export default {
          * Computed property to return all the classes that are static.
          */
         classes () {
+            const f = this.f || this.flex
             return [
                 `zen-box`,
                 this.className,
                 this.displayClass,
                 this.bgClass,
-                this.shadowClass
+                this.shadowClass,
+                f && this.responsive ? `zen-flex-sm` : ``
             ]
         }
     },
@@ -834,5 +869,9 @@ export default {
     word-wrap: break-word;
     background-clip: border-box;
 }
-
+@media screen and (max-width: 800px) {
+  .zen-box.zen-flex-sm {
+    flex-basis: 100% !important;
+  }
+}
 </style>

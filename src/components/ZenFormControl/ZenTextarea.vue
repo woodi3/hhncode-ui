@@ -60,7 +60,7 @@ export default {
         },
         resize: {
             type: String,
-            default: 'vertical'
+            default: 'none'
         },
         size: {
             type: String,
@@ -127,7 +127,7 @@ export default {
     align-items: center;
     position: relative;
     -webkit-appearance: none;
-    font-size: 0.875rem;
+    font-size: 1rem;
     padding-left: calc(var(--spacing-rem) * 3);
     padding-right: calc(var(--spacing-rem) * 3);
     height: 2rem;

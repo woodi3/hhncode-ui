@@ -1,6 +1,6 @@
 import stylis from 'stylis'
 import hash from './hash'
-// import generateAlphabeticName from './generateAlphabeticName'
+import generateAlphabeticName from './generateAlphabeticName'
 
 let counter = 1
 
@@ -28,7 +28,7 @@ const convertToCss = (json) => {
 
 export const createClassName = () => {
     counter++
-    const componentId = `zen-${hash(`zen${counter}`)}`
+    const componentId = generateAlphabeticName(hash(`zen${counter}`) >>> 0);
     return componentId
 }
 
@@ -47,3 +47,4 @@ export const injectClass = (stylesJSON) => {
     document.head.appendChild(style)
     return className
 }
+

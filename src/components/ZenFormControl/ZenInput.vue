@@ -5,7 +5,7 @@
         :class="classes"
         :disabled="disabled"
         :id="customId"
-        :aria-invalid="invalid"
+        :aria-invalid="invalid && hasBeenFocused"
         :name="name"
         :placeholder="placeholder"
         :required="required"
@@ -15,6 +15,8 @@
         :type="type"
         :value="value"
         @input="updateInput()"
+        @keydown="keydown"
+        @focus="allowValidation"
     />
 </template>
 
@@ -65,6 +67,9 @@ export default {
             type: String,
             default: ''
         },
+        trim: {
+            type: Boolean
+        },
         type: {
             type: String,
             default: "text",
@@ -76,6 +81,11 @@ export default {
         value: {
             required: false
         },
+    },
+    data () {
+        return {
+            hasBeenFocused: false,
+        }
     },
     computed: {
         classes () {
@@ -111,8 +121,18 @@ export default {
     },
     methods: {
         updateInput() {
-            this.$emit('input', this.$refs.zenInput.value)
-        }
+            const refVal = this.$refs.zenInput.value
+            const val = this.trim ? refVal.trim() : refVal
+            this.$emit('input', val)
+        },
+        allowValidation () {
+            this.hasBeenFocused = true
+        },
+        keydown ({ shiftKey, ctrlKey, keyCode, code }) {
+            if (!shiftKey && !ctrlKey && (keyCode === 13 || code === 'Enter')) {
+                this.$emit('submit');
+            }
+        },
     }
 }
 </script>

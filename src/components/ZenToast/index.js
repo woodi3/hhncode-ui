@@ -19,6 +19,11 @@ const toast = (opts) => {
     // create container element 
     if (!container) {
         container = document.createElement(`div`)
+
+        if (options.position === 'top'){
+            options.position = 'top-center'
+        }
+
         container.classList.add(`zen-toast-container`, `${options.position}`)
         container.setAttribute(`id`, `zenToastContainer`)
         document.body.appendChild(container)

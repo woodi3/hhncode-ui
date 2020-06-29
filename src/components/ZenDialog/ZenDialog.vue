@@ -3,7 +3,7 @@
         <div v-if="overlay" class="zen-dialog-overlay" @click="closeDialog">
         </div>
         <div tabindex="0" :ref="'startLock'" @focus="setLastFocusableElement"></div>
-        <div :class="classes" :ref="'dialogContent'">
+        <div :class="classes" :ref="'dialogContent'" :style="{height: height ? height : '100%'}">
             <slot></slot>
         </div>
         <div tabindex="0" :ref="'endLock'" @focus="setFirstFocusableElement"></div>
@@ -11,10 +11,6 @@
 </template>
 
 <script>
-/**
- * TODO
- */
-
 
 const focusableElementStr = 'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])'
 
@@ -38,6 +34,9 @@ export default {
         size: {
             type: String,
             default: "md"
+        },
+        height: {
+            type: String,
         }
     },
     data () {
@@ -78,7 +77,7 @@ export default {
     },
     methods: {
         listenForEscape (event) {
-            if (event.code.toLowerCase() === `escape`) {
+            if (event.code && event.code.toLowerCase() === `escape`) {
                 this.closeDialog()
             }
         },
@@ -181,7 +180,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
 .zen-dialog-overlay {
     position: fixed;
     top: 0;
@@ -198,7 +197,7 @@ export default {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     height: 100%;
-    max-height: calc(100vh - 7.5rem);
+    max-height: var(--dialog-height);
     width: 100%;
     overflow: hidden;
     z-index: 6;
@@ -208,11 +207,17 @@ export default {
 .zen-dialog-md {
     max-width: var(--dialog-md-width);
 }
+
+.zen-dialog-md .zen-dialog-body {
+    /* max-height: calc(var(--dialog-height) - 150px); */
+}
+
 .zen-dialog-lg {
     max-width: var(--dialog-lg-width);
 }
 .zen-dialog-sm {
     max-width: var(--dialog-sm-width);
+    max-height: var(--dialog-sm-height);
 }
 .zen-dialog-centered {
     top: 50%;

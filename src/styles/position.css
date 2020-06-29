@@ -1,5 +1,18 @@
 /* Position Classes */
+.fixed {
+    position: fixed;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
 .top {
+    top: 0px;
+    left: 0px;
+}
+.top-center {
     top: 0px;
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -26,4 +39,9 @@
 .bottom-left {
     bottom: 0px;
     left: calc(var(--spacing-rem) * 4);
+}
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

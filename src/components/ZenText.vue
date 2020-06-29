@@ -15,14 +15,33 @@ export default {
         },
         color: {
             type: String,
-            default: "black"
+            default: ""
         },
         bold: {
             type: Boolean
         },
         italic: {
             type: Boolean
-        }
+        },
+        align: {
+            type: String
+        },
+        header: {
+            type: String,
+            default: '',
+        },
+        transform: {
+            type: String,
+            default: '',
+        },
+        letterSpacing: {
+            type: String,
+            default: '',
+        },
+        // hoverColor: {
+        //     type: String,
+        //     default: ''
+        // },
     },
     data () {
         return {
@@ -32,12 +51,16 @@ export default {
     mounted () {
         this.className = injectClass(this.customStyles)
     },
-    computed: {
-        textColor () {
-            switch (this.color.toLowerCase()) {
+    methods: {
+        getColor(key) {
+            switch (key.toLowerCase()) {
                 case `primary`:
                     return {
                         class: `text-primary`
+                    }
+                case `dark-primary`:
+                    return {
+                        class: `text-dark-primary`
                     }
                 case `accent`:
                     return {
@@ -52,12 +75,25 @@ export default {
                     return {
                         class: `text-gray`
                     }
+                case `dark-gray`:
+                case `dark-grey`:
+                    return {
+                        class: `text-dark-gray`
+                    }
                 default:
                     return {
-                        color: this.color.toLowerCase()
+                        color: key === '' ? '' : `${key.toLowerCase()} !important`
                     }
             }
+        }
+    },
+    computed: {
+        textColor () {
+            return this.getColor(this.color)
         },
+        // textHoverColor () {
+        //     return this.getColor(this.hoverColor)
+        // },
         textFontSize () {
             switch (this.fontSize.toLowerCase()) {
                 case `small`:
@@ -88,14 +124,19 @@ export default {
                 ...textColor,
                 ...fontSize,
                 fontWeight: this.bold ? 'bold' : '',
-                fontStyle: this.italic ? 'italic' : ''
+                fontStyle: this.italic ? 'italic' : '',
+                textAlign: this.align ? this.align : '',
+                textTransform: this.transform,
+                letterSpacing: this.letterSpacing,
             }
         },
         classes () {
             return [
+                'zen-text',
                 this.textColor.class ? this.textColor.class : '',
                 this.textFontSize.class ? this.textFontSize.class : '',
-                this.className
+                this.className,
+                this.header.toLowerCase(),
             ]
         }
     }

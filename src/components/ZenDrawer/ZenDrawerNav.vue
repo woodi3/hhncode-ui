@@ -26,12 +26,12 @@ export default {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     top: 0;
     background-color: var(--white-color);
     border-color: var(--gray-lighter-color);
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: width 0.375s;
     padding-top: 60px;
 }
 .zen-drawer-nav.left {

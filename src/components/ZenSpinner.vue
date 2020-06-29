@@ -7,10 +7,13 @@
 import { injectClass } from '../utils'
 
 const colors = {
-    primaryLight: `var(--primary-rgb-light)`,
+    primaryLight: `var(--primary-super-light)`,
     accentLight: `var(--accent-rgb-light)`,
+    dangerLight: `var(--danger-rgb-light)`,
     primary: `var(--primary-color)`,
-    accent: `var(--accent-color)`
+    accent: `var(--accent-color)`,
+    white: `var(--white-color)`,
+    danger: `var(--danger-color)`
 }
 
 export default {
@@ -54,6 +57,14 @@ export default {
                 case `accent`:
                     bgColor = colors.accentLight
                     color = colors.accent
+                    break;
+                case `white`:
+                    bgColor = colors.white
+                    color = colors.primary
+                    break;
+                case `danger`:
+                    bgColor = colors.white
+                    color = colors.danger
                     break;
                 default: 
                     bgColor = colors.primaryLight

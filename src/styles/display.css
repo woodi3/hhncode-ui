@@ -1,22 +1,37 @@
 /* Display Classes */
 .z-block {
-    display: block;
+    display: block ;
+}
+.z-inline {
+    display: inline;
 }
 .z-inline-block {
-    display: inline-block;
+    display: inline-block ;
 }
 .z-flex {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display: -webkit-box ;
+    display: -ms-flexbox ;
+    display: flex ;
 }
 .z-inline-flex {
-    display: inline-flex;
+    display: inline-flex ;
 }
 .z-grid {
-    display: -ms-grid;
-    display: grid;
+    display: -ms-grid ;
+    display: grid ;
 }
 .z-inline-grid {
-    display: inline-grid;
+    display: inline-grid ;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    border: 0;
 }

@@ -1,9 +1,21 @@
 /* Border Classes */
 .border-accent {
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--accent-color) !important;
 }
 .border-primary {
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--primary-color) !important;
+}
+.border-primary-bottom {
+    border-bottom: 1px solid var(--primary-color) !important;
+}
+.border-light {
+    border: 1px solid var(--gray-lighter-color) !important;
+}
+.border-light-bottom {
+    border-bottom: 1px solid var(--gray-lighter-color) !important;
+}
+.border-2x {
+    border-width: 2px !important;
 }
 .border-color-accent {
     border-color: var(--accent-color) !important;
@@ -11,9 +23,14 @@
 .border-color-primary {
     border-color: var(--primary-color) !important;
 }
+.border-color-light {
+    border-color: var(--gray-lighter-color) !important;
+}
 .focus-border-color-accent:focus:not(:read-only):not([aria-invalid="true"]) {
     border-color: var(--accent-color) !important;
 }
 .focus-border-color-primary:focus:not(:read-only):not([aria-invalid="true"]) {
     border-color: var(--primary-color) !important;
 }
+
+/* TODO - Border radius classes */

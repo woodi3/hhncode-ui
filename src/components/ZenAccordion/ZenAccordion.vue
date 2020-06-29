@@ -1,5 +1,5 @@
 <template>
-    <zen-box class="zen-accordion" ref="zenAccordion" @click.native="toggle">
+    <zen-box class="zen-accordion" ref="zenAccordion">
         <slot></slot>
     </zen-box>
 </template>
@@ -9,6 +9,15 @@ import ZenBox from '../ZenBox'
 
 export default {
     name: 'zen-accordion',
+    props: {
+        isOpen: {
+            type: Boolean,
+        },
+        maxHeight: {
+            type: String,
+            default: "120px"
+        }
+    },
     components: {
         ZenBox
     },
@@ -16,18 +25,18 @@ export default {
         return {
             zenContentRef: null,
             zenHeaderRef: null,
-            isOpen: false,
         }
     },
-    methods: {
-        toggle () {
-            this.isOpen = !this.isOpen
-            if (this.isOpen) {
+    watch: {
+        isOpen (newVal) {
+            if (newVal) {
                 this.open()
             } else {
                 this.close()
             }
-        },
+        }
+    },
+    methods: {
         /** Gets the header and content elements */
         getChildren () {
             const zenAccordion = this.$refs.zenAccordion
@@ -43,6 +52,7 @@ export default {
             const { content, header } = this.getChildren()
             if (content) {
                 const contentEl = content.$el
+                contentEl.style.maxHeight = this.maxHeight
                 contentEl.classList.add('open')
             }
             if (header) {
@@ -56,6 +66,7 @@ export default {
             const { content, header } = this.getChildren()
             if (content) {
                 const contentEl = content.$el
+                contentEl.style.maxHeight = '0px'
                 contentEl.classList.remove('open')
             }
             if (header) {
@@ -69,12 +80,10 @@ export default {
 </script>
 <style scoped>
 .zen-accordion {
-    cursor: pointer;
     width: 100%;
-    border: none;
+    border: 1px solid var(--gray-rgb-light);
     text-align: left;
     outline: none;
     font-size: var(--font-size);
-    transition: height 0.4s;
 }
 </style>

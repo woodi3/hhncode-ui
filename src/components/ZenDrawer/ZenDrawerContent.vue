@@ -13,6 +13,7 @@ export default {
 <style scoped>
 .zen-drawer-content {
     transition: .5s;
-    padding: calc(var(--spacing-rem) * 4);
+    /* padding: calc(var(--spacing-rem) * 4); */
+    overflow-x: hidden;
 }
 </style>

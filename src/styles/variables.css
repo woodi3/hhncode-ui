@@ -1,18 +1,25 @@
 :root {
     --primary-color: #00a96d;
-    --primary-darker-color: #006541;
-    --primary-lighter-color: #66cba7;
-    --primary-rgb-light: rgb(0, 169, 109, .25);
-    --accent-color: #eea222;
-    --accent-darker-color: #8e6114;
-    --accent-lighter-color: #f4c77a;
-    --accent-rgb-light: rgb(238, 162, 34, .25);
+    --primary-dark-color: #00754c;
+    --primary-darker-color: #003c27;
+    --primary-super-dark: #00170f;
+    --primary-lighter-color: #49F5B9;
+    --primary-super-light: #e5f6f0;
+    /* --accent-color: #eea222; */
+    --accent-color: #8B11A8;
+    /* --accent-darker-color: #8e6114; */
+    --accent-darker-color: #370643;
+    /* --accent-lighter-color: #f4c77a; */
+    --accent-lighter-color: #d09fdc;
+    --accent-rgb-light: rgb(139, 17, 168, .25);
     --gray-color: #c2c2c2;
     --gray-rgb-light: rgb(194, 194, 194, .25);
     --gray-darker-color: #747474;
     --gray-lighter-color: #dadada;
     --divider-color: rgba(0,0,0,0.08);
     --danger-color: #ff4444;
+    --danger-darker-color: #992828;
+    --danger-rgb-light: rgb(255, 68, 68, .25);
     --white-color: #ffffff;
     --black-color: #000000;
     --spacing-rem: .25rem;
@@ -29,10 +36,13 @@
     --font-size: 1rem;
     --font-size-sm: .85rem;
     --font-size-lg: 1.25rem;
+    --dialog-height: calc(100vh - 7.5rem);
     --dialog-md-width: 30rem;
     --dialog-lg-width: 45rem;
     --dialog-sm-width: 15rem;
     --dialog-md-height: 30rem;
     --dialog-lg-height: 45rem;
     --dialog-sm-height: 15rem;
+    --twitter: #1DA1F2;
+    --instagram: #E1306C;
 }

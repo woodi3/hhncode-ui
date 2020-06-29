@@ -6,8 +6,9 @@
         <zen-button 
             v-if="showCloseBtn"
             class="zen-dialog-close-btn"
-            color="plain-black" 
+            :color="closeBtnColor" 
             @click="close">
+            <span class="sr-only">Close</span>
             <v-icon :icon="['fas', 'times']" />
         </zen-button>
     </header>
@@ -27,6 +28,10 @@ export default {
         showCloseBtn: {
             type: Boolean,
             default: true
+        },
+        closeBtnColor: {
+            type: String,
+            default: 'plain-danger',
         }
     },
     methods: {

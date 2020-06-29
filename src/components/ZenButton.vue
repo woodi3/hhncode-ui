@@ -4,9 +4,11 @@
     :style="customStyles"
     :disabled="disabled"
     :aria-label="ariaLabel" 
+    :title="title"
     @click="emitClick" 
     @keydown="emitKeyDown">
-        <slot></slot>
+        <zen-spinner v-if="isLoading" size="sm" :color="color"/>
+        <slot v-else></slot>
     </button>
 </template>
 
@@ -55,7 +57,10 @@ export default {
             type: String,
             required: false,
             default: 'A Zen button'
-        }
+        },
+        title: {
+            type: String,
+        },
     },
     data () {
         return {
@@ -72,6 +77,8 @@ export default {
                     return `btn-primary`
                 case `accent`:
                     return `btn-accent`
+                case `danger`:
+                    return `btn-danger`
                 case `plain`:
                     return `btn-plain`
                 case `plain-primary`: 
@@ -83,6 +90,8 @@ export default {
                     return `btn-plain text-gray`
                 case `plain-black`:
                     return `btn-plain text-black`
+                case `plain-danger`:
+                    return `btn-plain text-danger`
                 case `primary-outline`:
                 case `outline-primary`:
                     return `btn-outline-primary`
@@ -128,13 +137,13 @@ export default {
         }
     },
     methods: {
-        emitClick () {
-            this.$emit('click')
+        emitClick (evt) {
+            this.$emit('click',evt)
         },
         emitKeyDown (evt) {
             if (this.allowKeydown) {
                 if (evt.code === 'Enter' || evt.code === 'Space'){
-                    this.emitClick()
+                    this.emitClick(evt)
                 }
             }
         }
@@ -147,6 +156,7 @@ export default {
 .zen-btn {
     display: inline-flex;
     justify-content: center;
+    align-items: center;
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -159,7 +169,7 @@ export default {
     padding: .25rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: .25rem;
+    /* border-radius: .25rem; */
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .zen-btn:hover {
@@ -200,7 +210,7 @@ export default {
     border-color: var(--primary-darker-color);
 }
 .zen-btn-primary:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--primary-rgb-light);
+    box-shadow: 0 0 0 0.2rem var(--primary-super-light);
 }
 .zen-btn-outline-primary {
     color: var(--primary-color);
@@ -214,7 +224,7 @@ export default {
     border-color: var(--primary-color);
 }
 .zen-btn-outline-primary:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--primary-rgb-light);
+    box-shadow: 0 0 0 0.2rem var(--primary-super-light);
 }
 .zen-btn-outline-primary.disabled, .zen-btn-outline-primary:disabled {
     color: var(--primary-color);
@@ -251,6 +261,21 @@ export default {
     color: var(--accent-color);
     background-color: transparent;
 }
+
+.zen-btn-danger {
+    color: #fff;
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+.zen-btn-danger:hover:not(:disabled):not(.disabled) {
+    color: #fff;
+    background-color: var(--danger-darker-color);
+    border-color: var(--danger-darker-color);
+}
+.zen-btn-danger:focus:not(:disabled):not(.disabled) {
+    box-shadow: 0 0 0 0.2rem var(--danger-rgb-light);
+}
+
 .zen-btn-plain {
     font-weight: 400;
     font-size: inherit;
@@ -258,10 +283,10 @@ export default {
     background-color: transparent;
 }
 .zen-btn-plain:hover:not(:disabled):not(.disabled) {
-    background-color: var(--primary-rgb-light);
+    background-color: var(--primary-super-light);
 }
 .zen-btn-plain:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--primary-rgb-light);
+    box-shadow: 0 0 0 0.2rem var(--primary-super-light);
 }
 .zen-btn-plain.text-accent:hover:not(:disabled):not(.disabled) {
     background-color: var(--accent-rgb-light);
@@ -275,10 +300,22 @@ export default {
 .zen-btn-plain.text-gray:focus:not(:disabled):not(.disabled) {
     box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
 }
+.zen-btn-plain.text-dark-gray:hover:not(:disabled):not(.disabled) {
+    background-color: var(--gray-lighter-color);
+}
+.zen-btn-plain.text-dark-gray:focus:not(:disabled):not(.disabled) {
+    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
+}
 .zen-btn-plain.text-grey:hover:not(:disabled):not(.disabled) {
     background-color: var(--gray-lighter-color);
 }
 .zen-btn-plain.text-grey:focus:not(:disabled):not(.disabled) {
+    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
+}
+.zen-btn-plain.text-dark-grey:hover:not(:disabled):not(.disabled) {
+    background-color: var(--gray-lighter-color);
+}
+.zen-btn-plain.text-dark-grey:focus:not(:disabled):not(.disabled) {
     box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
 }
 .zen-btn-plain.text-black:hover:not(:disabled):not(.disabled) {
@@ -286,5 +323,11 @@ export default {
 }
 .zen-btn-plain.text-black:focus:not(:disabled):not(.disabled) {
     box-shadow: 0 0 0 0.2rem var(--shadow-rgb);
+}
+.zen-btn-plain.text-danger:focus:not(:disabled):not(.disabled) {
+    box-shadow: 0 0 0 0.2rem var(--danger-rgb-light);
+}
+.zen-btn-plain.text-danger:hover:not(:disabled):not(.disabled) {
+    background-color: var(--danger-rgb-light);
 }
 </style>
