@@ -9,6 +9,7 @@ Vue.use(VueRouter)
 // root route
 const rootRoute = {
   path: '/',
+  title: BASE_TITLE,
   redirect: routeDefs.home.path
 }
 

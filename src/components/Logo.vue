@@ -7,8 +7,8 @@
       H &#183; H &#183; C
     </zen-text>
     <svg v-else
-      width="180"
-      height="119"
+      :width="width"
+      :height="height"
       viewBox="0 0 180 119"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +75,14 @@ export default {
   props: {
     text: {
       type: Boolean,
+    },
+    width: {
+      type: String,
+      default: "180",
+    },
+    height: {
+      type: String,
+      defualt: "119",
     },
   },
 }
