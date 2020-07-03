@@ -99,7 +99,7 @@
                 <zen-box pb="2rem" pt="2rem" v-if="sortedComments.length > 0 && !commentsLoading">
                     <comment v-for="comment in sortedComments" 
                         :key="comment._id"
-                        :isUser="comment.email === user.email"
+                        :isUser="user && comment.email === user.email"
                         :comment="comment"
                         @edit="edit"
                         @delete="deleteComment"

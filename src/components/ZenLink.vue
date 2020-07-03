@@ -118,4 +118,7 @@ export default {
     display: block;
     text-align: center;
 }
+.zen-link:focus {
+    outline-color: var(--primary-color);
+}
 </style>

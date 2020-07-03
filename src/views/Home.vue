@@ -1,13 +1,16 @@
 <template>
     <zen-box>
+
+        <latest-posts :posts="latestPosts" :loading="loading"/>
+
         <!-- Trending posts -->
-        <snapshot title="Trending" 
+        <!-- <snapshot title="Trending" 
             bg="primary-dark"
             skew
             titleColorClass="text-white"
             dividerColor="primary-light" 
             :posts="trendingPosts" 
-            :loading="loading"/>
+            :loading="loading"/> -->
 
         <!-- Album review for desktop -->
         <album-reviews class="hide-on-mobile hide-on-ipad" 
@@ -36,6 +39,7 @@
 </template>
 
 <script>
+import LatestPosts from '../components/LatestPosts'
 import Snapshot from '../components/Snapshot'
 import AlbumReviews from '../components/AlbumReviews'
 import TutorialSnapshot from '../components/TutorialSnapshot'
@@ -47,6 +51,7 @@ export default {
         Snapshot,
         AlbumReviews,
         TutorialSnapshot,
+        LatestPosts,
     },
     data () {
         return {
@@ -54,6 +59,7 @@ export default {
             trendingPosts: [],
             albumReviews: [],
             tutorials: [],
+            latestPosts: [],
         }
     },
     mounted () {
@@ -64,16 +70,27 @@ export default {
             try {
                 this.loading = true
 
-                const postResults = await Promise.all([this.loadTrendingPosts(), this.loadReviewPosts(), this.loadTutorialPosts()])
+                const postResults = await Promise.all([
+                    this.loadLatestPosts(),
+                    this.loadTrendingPosts(), 
+                    this.loadReviewPosts(), 
+                    this.loadTutorialPosts()
+                ])
 
-                this.trendingPosts = [...postResults[0]]
-                this.albumReviews = [...postResults[1]]
-                this.tutorials = [...postResults[2]]
+                this.latestPosts = [...postResults[0]]
+                this.trendingPosts = [...postResults[1]]
+                this.albumReviews = [...postResults[2]]
+                this.tutorials = [...postResults[3]]
 
                 this.loading = false
             } catch (err) {
                 console.error(err)
             }
+        },
+        async loadLatestPosts () {
+            const isAdmin = false
+            const { success, posts } = await this.$postService.getPosts(isAdmin, { limit: 3 })
+            return success ? posts : []
         },
         async loadTutorialPosts () {
             const isAdmin = false
