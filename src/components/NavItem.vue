@@ -1,6 +1,6 @@
 <template>
     <zen-link class="nav-item ml-1 mr-1" 
-        :class="{active: active, primary: !accent, accent: accent, 'text-primary': !accent, 'text-accent': accent}" 
+        :class="{active: active, primary: !accent && active, accent: accent, 'text-primary': !accent && active, 'text-accent': accent}" 
         :to="to" 
         @click="linkClicked">
         <span v-if="icon">

@@ -7,7 +7,7 @@
     </template>
     <template v-else-if="!loading">
       <client-nav v-if="!hideNav && !isAdmin && !mobile" class="hide-on-mobile"/>
-      <zen-box v-if="!isAdmin && !mobile" mt="84px" class="hide-on-mobile">
+      <zen-box v-if="!isAdmin && !mobile" class="hide-on-mobile">
         <transition name="fade">
           <router-view />
         </transition>
