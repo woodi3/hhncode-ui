@@ -7,6 +7,10 @@
 
         <trending-posts :posts="trendingPosts" 
             :loading="loading" />
+
+        <code-preview :posts="codePosts" 
+            :loading="loading" 
+            :isAuthenticated="isAuthenticated" />
         <!-- Trending posts -->
         <!-- <snapshot title="Trending" 
             bg="primary-dark"
@@ -45,6 +49,7 @@
 <script>
 import LatestPosts from '../components/LatestPosts'
 import TrendingPosts from '../components/TrendingPosts'
+import CodePreview from '../components/CodePreview'
 
 // import Snapshot from '../components/Snapshot'
 // import AlbumReviews from '../components/AlbumReviews'
@@ -59,13 +64,14 @@ export default {
         // TutorialSnapshot,
         LatestPosts,
         TrendingPosts,
+        CodePreview,
     },
     data () {
         return {
             loading: true,
             trendingPosts: [],
             albumReviews: [],
-            tutorials: [],
+            codePosts: [],
             latestPosts: [],
         }
     },
@@ -86,13 +92,14 @@ export default {
                     this.loadLatestPosts(),
                     this.loadTrendingPosts(), 
                     this.loadReviewPosts(), 
-                    this.loadTutorialPosts()
+                    this.loadCodePosts(),
+                    this.loadTutorialPosts(),
                 ])
 
                 this.latestPosts = [...postResults[0]]
                 this.trendingPosts = [...postResults[1]]
                 this.albumReviews = [...postResults[2]]
-                this.tutorials = [...postResults[3]]
+                this.codePosts = [...postResults[3], ...postResults[4]]
                 
                 this.loading = false
             } catch (err) {
@@ -104,9 +111,14 @@ export default {
             const { success, posts } = await this.$postService.getPosts(isAdmin, { limit: 3 })
             return success ? posts : []
         },
+        async loadCodePosts () {
+            const isAdmin = false
+            const { success, posts } = await this.$postService.getPosts(isAdmin, {limit: 3, isCode: true, isTutorial: false})
+            return success ? posts : []
+        },
         async loadTutorialPosts () {
             const isAdmin = false
-            const { success, posts } = await this.$postService.getPosts(isAdmin, {limit: LIMIT, isTutorial: true})
+            const { success, posts } = await this.$postService.getPosts(isAdmin, {limit: 3, isCode: true, isTutorial: true})
             return success ? posts : []
         },
         async loadReviewPosts () {

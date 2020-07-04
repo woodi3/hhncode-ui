@@ -56,7 +56,7 @@ export default {
             },
             {
                 label: 'Code',
-                to: '/tutorials',
+                to: '/code',
             },
             {
                 label: 'Account',
