@@ -1,8 +1,12 @@
 <template>
     <zen-box>
 
-        <latest-posts :posts="latestPosts" :loading="loading"/>
+        <latest-posts :posts="latestPosts" 
+            :loading="loading"
+            :isAuthenticated="isAuthenticated" />
 
+        <trending-posts :posts="trendingPosts" 
+            :loading="loading" />
         <!-- Trending posts -->
         <!-- <snapshot title="Trending" 
             bg="primary-dark"
@@ -13,45 +17,48 @@
             :loading="loading"/> -->
 
         <!-- Album review for desktop -->
-        <album-reviews class="hide-on-mobile hide-on-ipad" 
+        <!-- <album-reviews class="hide-on-mobile hide-on-ipad" 
             :albumReviews="albumReviews" 
-            :loading="loading"/>
+            :loading="loading"/> -->
         <!-- Album reviews for mobile and ipad -->
-        <snapshot class="hide-on-desktop" 
+        <!-- <snapshot class="hide-on-desktop" 
             title="Recent Album Reviews"
             titleColorClass="text-black" 
             :posts="albumReviews"  
-            :loading="loading" />
+            :loading="loading" /> -->
         
         <!-- Tutorial snap shots for ipad and desktop -->
-        <tutorial-snapshot 
+        <!-- <tutorial-snapshot 
             class="hide-on-mobile" 
             :tutorials="tutorials" 
-            :loading="loading"/>
+            :loading="loading"/> -->
         
         <!-- Tutorial snap shot for mobile -->
-        <snapshot class="hide-on-ipad hide-on-desktop"
+        <!-- <snapshot class="hide-on-ipad hide-on-desktop"
             title="Recent Tutorials" 
             titleColorClass="text-black"
             :posts="tutorials" 
-            :loading="loading"/>
+            :loading="loading"/> -->
     </zen-box>
 </template>
 
 <script>
 import LatestPosts from '../components/LatestPosts'
-import Snapshot from '../components/Snapshot'
-import AlbumReviews from '../components/AlbumReviews'
-import TutorialSnapshot from '../components/TutorialSnapshot'
+import TrendingPosts from '../components/TrendingPosts'
+
+// import Snapshot from '../components/Snapshot'
+// import AlbumReviews from '../components/AlbumReviews'
+// import TutorialSnapshot from '../components/TutorialSnapshot'
 
 const LIMIT = 4
 
 export default {
     components: {
-        Snapshot,
-        AlbumReviews,
-        TutorialSnapshot,
+        // Snapshot,
+        // AlbumReviews,
+        // TutorialSnapshot,
         LatestPosts,
+        TrendingPosts,
     },
     data () {
         return {
@@ -64,6 +71,11 @@ export default {
     },
     mounted () {
         this.load()
+    },
+    computed: {
+        isAuthenticated () {
+            return this.$store.state.isAuthenticated
+        },
     },
     methods: {
         async load () {
@@ -81,7 +93,7 @@ export default {
                 this.trendingPosts = [...postResults[1]]
                 this.albumReviews = [...postResults[2]]
                 this.tutorials = [...postResults[3]]
-
+                
                 this.loading = false
             } catch (err) {
                 console.error(err)
