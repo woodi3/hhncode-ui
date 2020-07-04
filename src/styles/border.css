@@ -14,8 +14,14 @@
 .border-light-bottom {
     border-bottom: 1px solid var(--gray-lighter-color) !important;
 }
+.border-white-bottom {
+    border-bottom: 1px solid var(--white-color) !important;
+}
 .border-2x {
     border-width: 2px !important;
+}
+.border-3x {
+    border-width: 3px !important;
 }
 .border-color-accent {
     border-color: var(--accent-color) !important;
@@ -33,4 +39,29 @@
     border-color: var(--primary-color) !important;
 }
 
+.border-radius-md, .br-md {
+    border-radius: calc(var(--spacing-rem) * 2);
+}
+
+.border-radius-sm {
+    border-radius: var(--spacing-rem);
+}
+
+.border-radius-lg {
+    border-radius: calc(var(--spacing-rem) * 4);
+}
+
+.border-radius-bottom-corners, .brbc {
+    border-bottom-left-radius: calc(var(--spacing-rem) * 2);
+    border-bottom-right-radius: calc(var(--spacing-rem) * 2);
+}
+
+.border-radius-top-corners, .brtc {
+    border-top-left-radius: calc(var(--spacing-rem) * 2);
+    border-top-right-radius: calc(var(--spacing-rem) * 2);
+}
+
+.border-radius-bottom-left, .brbl {
+    border-bottom-left-radius: calc(var(--spacing-rem) * 2);
+}
 /* TODO - Border radius classes */

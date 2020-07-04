@@ -18,7 +18,7 @@
                     :key="post._id" 
                     :isAuthenticated="isAuthenticated"
                     :bookmarked="bookmarked(post)"
-                    @click.native="goToDetail(post)"
+                    @click="goToDetail(post)"
                     @enterPressed="goToDetail(post)"/>
             </zen-box>
         </zen-box>

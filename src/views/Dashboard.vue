@@ -36,7 +36,7 @@ export default {
                 },
                 {
                     label: 'Tutorials',
-                    to: '/admin/dashboard/tutorials',
+                    to: '/admin/dashboard/code',
                 },
                 {
                     label: 'Tags',

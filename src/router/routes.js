@@ -1,6 +1,6 @@
 export const HOME = 'home'
 export const HIPHOP = 'hiphop'
-export const TUTORIAL = 'tutorial'
+export const CODE = 'code'
 export const TAG = 'tag'
 export const ACCOUNT_SETTINGS = 'account-settings'
 export const NEW_ACCOUNT = 'new-account'
@@ -62,9 +62,9 @@ const routes = {
             title: BASE_TITLE + ' | Hip Hop'
         },
     },
-    [`${TUTORIAL}s`]: {
-        name: `${TUTORIAL}s`,
-        path: `/${TUTORIAL}s`,
+    [`${CODE}s`]: {
+        name: `${CODE}`,
+        path: `/${CODE}`,
         component: Code,
         meta: {
             title: BASE_TITLE + ' | Code'
@@ -161,8 +161,8 @@ const routes = {
                         },
                     },
                     {
-                        path: `${TUTORIAL}s`,
-                        name: `${ADMIN}-${DASHBOARD}-${TUTORIAL}s`,
+                        path: `${CODE}`,
+                        name: `${ADMIN}-${DASHBOARD}-${CODE}`,
                         component: AdminTutorials,
                         meta: {
                             title: BASE_TITLE + ' | Admin Code'

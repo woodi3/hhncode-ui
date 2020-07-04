@@ -80,6 +80,10 @@ export default {
                     return {
                         class: `text-dark-gray`
                     }
+                case 'white':
+                    return {
+                        class: 'text-white'
+                    }
                 default:
                     return {
                         color: key === '' ? '' : `${key.toLowerCase()} !important`
