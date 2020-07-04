@@ -25,6 +25,8 @@ import {
   faSquare,
   faCheck,
   faPlus,
+  faChevronLeft,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faBookmark as farBookmark, faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
@@ -140,7 +142,9 @@ library.add([
   faCheckSquare,
   faSquare,
   faCheck,
-  faPlus
+  faPlus,
+  faChevronRight,
+  faChevronLeft
 ], [
   faTwitter, 
   faInstagram
