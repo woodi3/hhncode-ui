@@ -1,12 +1,12 @@
 <template>
     <zen-box>
 
+        <trending-posts :posts="trendingPosts" 
+            :loading="loading" />
+
         <latest-posts :posts="latestPosts" 
             :loading="loading"
             :isAuthenticated="isAuthenticated" />
-
-        <trending-posts :posts="trendingPosts" 
-            :loading="loading" />
 
         <code-preview :posts="codePosts" 
             :loading="loading" 

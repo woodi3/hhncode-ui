@@ -1,6 +1,9 @@
 <template>
     <zen-box class="code-preview container" 
-        position="relative">
+        position="relative"
+        mt="4rem"
+        ml="auto"
+        mr="auto">
         <zen-flex class="action-bar brtc bg-primary pl-2" 
             align="center">
             <zen-box class="action-circle"></zen-box>
@@ -22,7 +25,8 @@
                     pt="1.5rem"
                     :class="[active(tab) ? [...activeClasses] : '', idx === tabs.length - 1 ? 'last' : '']"
                     @click.native="toggleTab(tab)">
-                    <zen-text bold
+                    <zen-text :ref="`${tab.key}_tab`" 
+                        bold
                         align="center" 
                         :color="active(tab) ? 'white' : 'gray'">
                         {{tab.text}}
@@ -84,6 +88,7 @@
 
 <script>
 import Typewriter from 'typewriter-effect/dist/core';
+import { gsap } from "gsap";
 
 import VerticalPostThumbnail from './VerticalPostThumbnail'
 
@@ -92,11 +97,13 @@ const TABS = [
         key: 'POSTS',
         text: 'Posts',
         computedKey: 'showingPosts',
+        tween: null,
     },
     {
         key: 'TUTORIALS',
         text: 'Tutorials',
         computedKey: 'showingTutorials',
+        tween: null
     },
 ]
 
@@ -118,12 +125,13 @@ export default {
     data () {
         return {
             tabs: [...TABS],
-            activeTab: {...TABS[0]},
+            activeTab: {},
             animatedText: `Coding should be like a breath of fresh air.`,
             typeWriter: null,
         }
     },
     mounted () {
+        this.toggleTab({...TABS[0]})
         this.typeWriter = new Typewriter('.animated-text', {
             strings: this.animatedText,
             delay: 100,
@@ -142,7 +150,7 @@ export default {
             return this.posts.filter(p => p.isTutorial)
         },
         displayPosts () {
-            return this.activeTab.key === 'POSTS' ? this.codePosts : this.tutorialPosts
+            return this._displayPosts(this.activeTab.key)
         },
         user () {
             return this.$store.state.user
@@ -154,6 +162,18 @@ export default {
         },
         toggleTab (tab) {
             this.activeTab = {...tab}
+            this.tabs.forEach(t => {
+                if (t.key !== tab.key) {
+                    if (this._displayPosts(t.key).length > 0) {
+                        this._animateTab(t)
+                    }
+                }
+            })
+            if (this.activeTab.tween) {
+                const endTime = this.activeTab.tween.endTime()
+                this.activeTab.tween.seek(endTime, false)
+                this.activeTab.tween.kill()
+            }
         },
         navigateToCode () {
             this.$router.push('/code')
@@ -163,6 +183,25 @@ export default {
         },
         goToDetail(post) {
             this.$router.push({name: 'detail', query: {title: post.title, _id: post._id}})
+        },
+        _animateTab(tab) {
+            const el = this.$refs[`${tab.key}_tab`][0].$el
+            tab.tween = gsap.fromTo(el, 1, 
+            { 
+                rotation: -20
+            }, 
+            {
+                rotation: 0,
+                ease:'bounce.out',
+                repeatDelay: 1,
+                repeat: -1
+            })
+        },
+        _displayPosts (key) {
+            if (key === 'POSTS') {
+                return this.codePosts
+            }
+            return this.tutorialPosts
         },
     },
 }
@@ -212,6 +251,7 @@ export default {
     top: 60%;
     left: 70px;
     right: 0;
+    width: 100%;
 }
 .view-more:hover {
     cursor: pointer;
