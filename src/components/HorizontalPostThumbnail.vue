@@ -48,6 +48,10 @@ export default {
         post: {
             type: Object,
         },
+        maxHeight: {
+            type: String,
+            default: ""
+        },
     },
     computed: {
         headerImgAltText () {
@@ -73,6 +77,10 @@ export default {
 </script>
 
 <style scoped>
+.horizontal-post {
+    max-height: 200px;
+    max-width: 600px;
+}
 .horizontal-post > .horizontal-post-container > .post-img-container > img {
     width: 100%;
     height: 100%;

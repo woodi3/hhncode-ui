@@ -58,12 +58,10 @@
                 mt="1rem" 
                 position="absolute">
                 <zen-button color="plain-black"
-                    :disabled="disableBack"
                     @click="back">
                     <v-icon :icon="['fas', 'chevron-left']"/>
                 </zen-button>
                 <zen-button color="plain-black"
-                    :disabled="disableNext"
                     @click="next">
                     <v-icon :icon="['fas', 'chevron-right']"/>
                 </zen-button>
@@ -83,6 +81,8 @@
 import { gsap } from "gsap";
 
 import Badge from './Badge'
+
+const SLIDE_TIMEOUT = 6000
 
 export default {
     components: {
@@ -108,25 +108,34 @@ export default {
     data () {
         return {
             currentIndex: 0,
+            intervalTimer: null,
         }
+    },
+    mounted () {
+        this.intervalTimer = setInterval(this.next, SLIDE_TIMEOUT)
+    },
+    beforeDestroy () {
+        clearInterval(this.intervalTimer)
     },
     computed: {
         currentPost () {
             return this.posts[this.currentIndex]
         },
-        disableBack () {
-            return this.currentIndex <= 0
-        },
-        disableNext () {
-            return this.currentIndex >= this.posts.length-1
-        },
         isAnimating () {
             return gsap.isTweening('.trending-post-header-img') 
             || gsap.isTweening('.trending-post-info-container')
         },
+        maxLength () {
+            return this.posts.length
+        },
     },
     methods: {
         setCurrentIndex (index) {
+            if (index > this.maxLength-1) {
+                index = 0
+            } else if (index < 0) {
+                index = this.maxLength - 1
+            }
             this.currentIndex = index
         },
         back () {
