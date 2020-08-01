@@ -26,7 +26,8 @@
                         {{albumReview.title}}
                     </zen-text>
                     <zen-button ariaLabel="Read button"
-                        class="detail-btn mt-2">
+                        class="detail-btn mt-2"
+                        @click="goToDetail(albumReview)">
                         <span class="mr-2">Read</span>
                         <v-icon :icon="['fas', 'chevron-right']"/>
                     </zen-button>
