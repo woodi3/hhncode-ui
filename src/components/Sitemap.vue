@@ -13,7 +13,7 @@
                 </zen-link>
             </li>
             <li>
-                <zen-link to="/tutorials" color="white" title="Code Link">
+                <zen-link to="/code" color="white" title="Code Link">
                     Code
                 </zen-link>
             </li>
