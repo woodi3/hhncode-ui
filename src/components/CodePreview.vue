@@ -131,13 +131,20 @@ export default {
         }
     },
     mounted () {
-        this.toggleTab({...TABS[0]})
         this.typeWriter = new Typewriter('.animated-text', {
             strings: this.animatedText,
             delay: 100,
             autoStart: true,
             // loop: true,
         });
+    },
+    watch: {
+        // toggle tab when load
+        posts (newVal) {
+            if (newVal.length > 0 && !this.activeTab.key) {
+                this.toggleTab({...TABS[0]})
+            }
+        }
     },
     computed: {
         activeClasses() {
