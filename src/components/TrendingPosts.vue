@@ -26,7 +26,8 @@
                     </zen-text>
                 </zen-box>
                 <zen-box class="trending-post-info"
-                    position="absolute">
+                    position="absolute"
+                    @click.native="goToDetail(currentPost)">
                     <zen-box class="trending-post-info-container">
                         <zen-text header="h4">{{currentPost.title}}</zen-text>
                         <zen-box v-if="currentPost.meta" 
@@ -71,7 +72,8 @@
             class="trending-post-header-img"
             position="absolute"
             h="400px"
-            w="450px">
+            w="450px"
+            @click.native="goToDetail(currentPost)">
             <img :src="currentPost.headerImg"/>
         </zen-box>
     </zen-box>
@@ -195,6 +197,9 @@ export default {
                 }
             }
         },
+        goToDetail(post) {
+            this.$router.push({name: 'detail', query: {title: post.title, _id: post._id}})
+        },
     },
 }
 </script>
@@ -227,5 +232,11 @@ export default {
 .arrows {
     left: 2rem;
     bottom: 2rem;
+}
+.trending-post-info:hover {
+    cursor: pointer;
+}
+.trending-post-header-img:hover {
+    cursor: pointer;
 }
 </style>
