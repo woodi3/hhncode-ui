@@ -145,7 +145,7 @@ export default {
             const search = this.searchVal.toLowerCase()
             if (search.length > 0) {
                 return posts.filter(p => 
-                    (p.postTitle.toLowerCase().indexOf(search) > -1 )
+                    (p.title.toLowerCase().indexOf(search) > -1 )
                 )
             }
             return posts
