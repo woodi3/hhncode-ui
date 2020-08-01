@@ -183,7 +183,7 @@ export default {
         
         this.$store.dispatch(IS_AUTHENTICATED_KEY, isAuthenticated)
       } catch (err) {
-        //console.log(err)
+        this.$store.dispatch(IS_AUTHENTICATED_KEY, false)
       }
     },
     async loadFeatures () {

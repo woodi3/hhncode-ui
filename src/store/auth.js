@@ -5,6 +5,9 @@ export const REDIRECT_KEY = 'setRedirect'
 // MUTATIONS
 const mutSetIsAuthenticated = (state, val) => {
     state.isAuthenticated = val
+    if (!val) {
+        clearStorage()
+    }
 }
 
 const mutSetToken = (state, token) => {
@@ -34,6 +37,11 @@ function getToken () {
 }
 function setToken(token) {
     setLocalStorage(LOCAL_STORAGE_TOKEN, token)
+}
+const LOCAL_STORAGE_USER = 'hhncode_user'
+function clearStorage() {
+    setToken('')
+    setLocalStorage(LOCAL_STORAGE_USER, '')
 }
 
 function getFromLocalStorage(key){
