@@ -21,9 +21,8 @@
             :loading="loading"/> -->
 
         <!-- Album review for desktop -->
-        <!-- <album-reviews class="hide-on-mobile hide-on-ipad" 
-            :albumReviews="albumReviews" 
-            :loading="loading"/> -->
+        <album-reviews :albumReviews="albumReviews" 
+            :loading="loading"/>
         <!-- Album reviews for mobile and ipad -->
         <!-- <snapshot class="hide-on-desktop" 
             title="Recent Album Reviews"
@@ -52,7 +51,7 @@ import TrendingPosts from '../components/TrendingPosts'
 import CodePreview from '../components/CodePreview'
 
 // import Snapshot from '../components/Snapshot'
-// import AlbumReviews from '../components/AlbumReviews'
+import AlbumReviews from '../components/AlbumReviews'
 // import TutorialSnapshot from '../components/TutorialSnapshot'
 
 const LIMIT = 4
@@ -60,7 +59,7 @@ const LIMIT = 4
 export default {
     components: {
         // Snapshot,
-        // AlbumReviews,
+        AlbumReviews,
         // TutorialSnapshot,
         LatestPosts,
         TrendingPosts,

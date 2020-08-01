@@ -38,6 +38,10 @@ export default {
             type: String,
             default: '',
         },
+        lineHeight: {
+            type: String,
+            default: '',
+        },
         // hoverColor: {
         //     type: String,
         //     default: ''
@@ -132,6 +136,7 @@ export default {
                 textAlign: this.align ? this.align : '',
                 textTransform: this.transform,
                 letterSpacing: this.letterSpacing,
+                lineHeight: this.lineHeight,
             }
         },
         classes () {
