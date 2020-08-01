@@ -9,7 +9,7 @@
             @mouseleave.native="setPrivacyPolicyHover(false)">
             <zen-text :color="privacyPolicyHover ? 'dark-primary' : 'gray'" fontSize="sm">Privacy Policy</zen-text>
         </zen-button>
-        <zen-dialog :isOpen="privacyPolicyOpen" @close="close">
+        <zen-dialog class="text-black" :isOpen="privacyPolicyOpen" @close="close">
             <zen-dialog-header @close="close">
                 Privacy Policy
             </zen-dialog-header>
