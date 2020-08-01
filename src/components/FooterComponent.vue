@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-      <divider mt="32px" mb="32px"/>
+      <!-- <divider mt="32px" mb="32px"/> -->
       <zen-box class="buy-coffee text-center mt-8 mb-8">
         <buy-me-coffee />
       </zen-box>
