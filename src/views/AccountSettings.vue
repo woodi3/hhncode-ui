@@ -83,8 +83,8 @@
                     <zen-accordion maxHeight="300px" :isOpen="moreSettingsOpts.open">
                         <zen-accordion-header 
                             :icons="moreSettingsOpts.icons"
-                            @open="moreSettingsOpts.open = true"
-                            @close="moreSettingsOpts.open = false">
+                            @open="openSettingsAccordion"
+                            @close="closeSettingsAccordion">
                             More Settings
                         </zen-accordion-header>
                         <zen-accordion-content>
@@ -92,68 +92,22 @@
                                 align="center" 
                                 justify="space-between">
                                 <zen-text>View Bookmarks</zen-text>
-                                <zen-button color="plain-accent" @click="openBookmarks">
+                                <zen-button color="plain" @click="openBookmarks">
                                     Open
                                 </zen-button>
                             </zen-flex>
-                            <zen-flex align="center" v-if="!different">
+                            <zen-flex v-if="!different" justify="space-between"
+                                align="center">
                                 <zen-text>Change your password</zen-text>
-                                <zen-box f="0 0 50%" ml="auto">
-                                    <zen-box mb=".5rem">
-                                        <zen-input-group>
-                                            <zen-input-element position="left">
-                                                <span class="sr-only">Lock icon</span>
-                                                <v-icon v-if="!checkingPassword" class="text-grey" 
-                                                    :icon="['fas', oldPasswordValid ? 'lock-open' : 'lock']"/>
-                                                <zen-spinner v-else size="sm"/>   
-                                            </zen-input-element>
-                                            <zen-input
-                                                v-model="oldPassword"
-                                                variant="flushed" 
-                                                class="old-password mt-3 mb-1" 
-                                                name="old-password" 
-                                                placeholder="Current password" 
-                                                ariaLabel="Current password"
-                                                type="password"
-                                                :invalid="!oldPasswordValid"
-                                                @input="handleCurrentPasswordEntry"
-                                            />
-                                        </zen-input-group>
-                                    </zen-box>
-                                    <zen-box mt=".5rem" mb="2rem" v-if="oldPasswordValid">
-                                        <zen-input-group>
-                                            <zen-input-element position="left">
-                                                <span class="sr-only">Lock icon</span>
-                                                <v-icon 
-                                                    :class="newPasswordIsValid ? 'text-primary' : 'text-danger'" 
-                                                    :icon="['fas', newPasswordIsValid ? 'check' : 'lock']"/> 
-                                            </zen-input-element>
-                                            <zen-input
-                                                v-model="newPassword"
-                                                variant="flushed" 
-                                                class="new-password mt-3 mb-1" 
-                                                name="new-password" 
-                                                placeholder="New password" 
-                                                ariaLabel="New password"
-                                                type="password"
-                                                :invalid="!newPasswordIsValid"
-                                                :disabled="saving"
-                                            />
-                                        </zen-input-group>
-                                        <zen-button size="sm"
-                                            :disabled="saving || !newPasswordIsValid"
-                                            :isLoading="saving"
-                                            @click="setNewPassword">
-                                            Change Password
-                                        </zen-button>
-                                    </zen-box>
-                                </zen-box>
+                                <zen-button color="plain" @click="openPasswordSheet">
+                                    Change Password
+                                </zen-button>
                             </zen-flex>
                             <zen-flex class="mb-2" 
                                 justify="space-between" 
                                 align="center">
                                 <zen-text>Sign out</zen-text>
-                                <zen-button color="plain" @click="logout" :disabled="saving">
+                                <zen-button color="plain-accent" @click="logout" :disabled="saving">
                                     Sign out
                                 </zen-button>
                             </zen-flex>
@@ -178,25 +132,28 @@
                 :isOpen="deleteDialogOpen"
                 @cancel="closeDeleteDialog"
                 @confirm="deleteUser" />
-            <!-- <zen-box class="bookmark-btn" v-if="hasBookmarks">
-                <zen-button color="accent" @click="openBookmarks">
-                    Open Bookmarks
-                </zen-button>
-            </zen-box> -->
 
             <bookmarks :posts="bookmarkedPosts" 
                 :isOpen="showBookmarks" 
                 :loading="bookmarksLoading"
                 @close="closeBookmarks"/>
+            
+            <change-password :isOpen="showPasswordSheet"
+                :saving="saving"
+                :checkingPassword="checkingPassword"
+                :oldPasswordValid="oldPasswordValid"
+                @currentPassInput="setOldPassword"
+                @close="closePasswordSheet"
+                @changePassword="setNewPassword"/>
         </template>
     </zen-box>
 </template>
 
 <script>
-import debounce from 'lodash.debounce'
 
 import AppLoader from '../components/AppLoader'
 import Bookmarks from '../components/Bookmarks'
+import ChangePassword from '../components/ChangePassword'
 
 import {HIDE_FOOTER_KEY} from '../store/nav'
 import { hasValue, validEmail, INPUT_STATES } from '../utils'
@@ -217,6 +174,7 @@ export default {
     components: {
         AppLoader,
         Bookmarks,
+        ChangePassword,
     },
     data () {
         return {
@@ -237,9 +195,9 @@ export default {
             deleteDialogOpen: false,
             bookmarkedPosts: [],
             showBookmarks: false,
+            showPasswordSheet: false,
             oldPasswordValid: false,
             oldPassword: '',
-            newPassword: '',
         }
     },
     mounted () {
@@ -291,9 +249,7 @@ export default {
                 || this.user.notify !== this.userCopy.notify
             )
         },
-        newPasswordIsValid () {
-            return hasValue(this.newPassword) && this.newPassword.length >= 6  
-        },
+        
         nameIsValid () {
             return hasValue(this.userCopy.name)
         },
@@ -329,6 +285,12 @@ export default {
         showFooter () {
             this.$store.dispatch(HIDE_FOOTER_KEY, false)  
         },
+        openSettingsAccordion () {
+            this.moreSettingsOpts.open = true
+        },
+        closeSettingsAccordion () {
+            this.moreSettingsOpts.open = false
+        },
         copyUser (user) {
            this.userCopy = Object.assign({}, user)
         },
@@ -340,7 +302,13 @@ export default {
         },
         openBookmarks () {
             this.showBookmarks = true
-            setTimeout(this._loadBookmarks.bind(this), 600)
+            setTimeout(this._loadBookmarks.bind(this), 750)
+        },
+        openPasswordSheet () {
+            this.showPasswordSheet = true
+        },
+        closePasswordSheet () {
+            this.showPasswordSheet = false
         },
         closeBookmarks () {
             this.showBookmarks = false
@@ -355,20 +323,24 @@ export default {
           this.clearSession()
           this.$router.replace({name: 'home'})
         },
+        setOldPassword (val) {
+            this.oldPassword = val
+            this._validatePassword()
+        },
         resetPasswordInputs () {
-            this.newPassword = ''
             this.oldPasswordValid = false
             this.oldPassword = ''
         },
-        async setNewPassword () {
-            this.userCopy.password = this.newPassword
+        async setNewPassword (newPassword) {
+            this.userCopy.password = newPassword
             await this.save()
-            this.resetPasswordInputs()
-            this.load()
+            this.closePasswordSheet()
+            setTimeout(() => {
+                this.resetPasswordInputs()
+                this.load()
+                this.closeSettingsAccordion()
+            }, 1000)
         },
-        handleCurrentPasswordEntry: debounce(function () {
-            this._validatePassword()
-        }, 250),
         async _validatePassword () {
             try {
                 this.state = STATES.CHECKING_PASSWORD

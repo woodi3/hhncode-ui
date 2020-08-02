@@ -3,7 +3,7 @@
         ref="bottomSheet" 
         tabindex="0">
         <div class="bottom-sheet-content bg-white" ref="bottomSheetContent">
-            <zen-box class="close-btn" v-if="!loading">
+            <zen-box class="close-btn pb-4" v-if="!loading">
                 <zen-button color="plain-grey" @click="close">
                     <span class="sr-only">Close</span>
                     <v-icon :icon="['fas', 'times']"/>
@@ -18,7 +18,7 @@
 import { gsap } from "gsap";
 
 const focusableElementStr = 'a:not([disabled]), button:not([disabled]), input[type=text]:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])'
-const ANIMATION_SPEED = 0.5
+const ANIMATION_SPEED = 0.7
 export default {
     props: {
         isOpen: {
@@ -128,7 +128,7 @@ export default {
 }
 .close-btn {
     position: absolute;
-    top: 1.5rem;
+    top: 1rem;
     right: 1rem;
 }
 </style>

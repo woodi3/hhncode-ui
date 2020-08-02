@@ -2,7 +2,7 @@
     <bottom-sheet :isOpen="isOpen" 
         :loading="loading" 
         @close="close">
-        <zen-box class="mt-4">
+        <zen-box>
             <zen-box class="bookmark-header pl-10 pt-2 pb-2">
                 <zen-text header="h6">
                     Bookmarks
