@@ -13,7 +13,7 @@
     --accent-lighter-color: #d09fdc;
     --accent-rgb-light: rgb(139, 17, 168, .25);
     --gray-color: #c2c2c2;
-    --gray-rgb-light: rgb(194, 194, 194, .25);
+    --gray-rgb-light: rgba(194, 194, 194, 0.25);
     --gray-darker-color: #747474;
     --gray-lighter-color: #dadada;
     --divider-color: rgba(0,0,0,0.08);

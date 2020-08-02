@@ -3,7 +3,8 @@
         position="relative"
         mt="4rem"
         ml="auto"
-        mr="auto">
+        mr="auto"
+        :h="mobile ? '1150px' : '1000px'">
         <zen-flex class="action-bar brtc bg-primary pl-2" 
             align="center">
             <zen-box class="action-circle"></zen-box>
@@ -12,7 +13,7 @@
         </zen-flex>
         <zen-box class="side-bar brbl"
             position="absolute"
-            w="70px"
+            :w="mobile ? '50px' : '70px'"
             bg="gray-dark">
             <zen-flex class="side-bar-items" 
                 direction="column" 
@@ -21,7 +22,7 @@
                 <zen-box v-for="(tab, idx) in tabs"
                     :key="tab.key"
                     class="side-bar-item border-3x"
-                    pb="1.5rem"
+                    :pb="mobile ? '.75rem' : '1.5rem'"
                     pt="1.5rem"
                     :class="[active(tab) ? [...activeClasses] : '', idx === tabs.length - 1 ? 'last' : '']"
                     @click.native="toggleTab(tab)">
@@ -59,15 +60,16 @@
                 f="0 0 25%"
                 width="60%">
                 <zen-text class="animated-text" 
-                    header="h2" 
+                    :header="mobile ? 'h4' : 'h2'" 
                     color="white" 
                     ref="codeHeaderText">
                     <span class="sr-only">{{animatedText}}</span>
                 </zen-text>
             </zen-box>
+            <!-- TODO when on mobile use carosuel -->
             <zen-box class="code-preview-content"
                 position="absolute">
-                <zen-flex>
+                <zen-flex class="hide-on-mobile">
                     <zen-box f="0 0 33%"
                         pl=".5rem" 
                         pr=".5rem" 
@@ -81,6 +83,10 @@
                             @enterPressed="goToDetail(post)"/>
                     </zen-box>
                 </zen-flex>
+                <mobile-trending-posts class="hide-on-ipad hide-on-desktop" 
+                    :posts="displayPosts"
+                    height="600px"
+                    hideTrending />
             </zen-box>
         </zen-box>
     </zen-box>
@@ -91,6 +97,8 @@ import Typewriter from 'typewriter-effect/dist/core';
 import { gsap } from "gsap";
 
 import VerticalPostThumbnail from './VerticalPostThumbnail'
+import MobileTrendingPosts from './MobileTrendingPosts'
+import { DEVICE_ENUM } from '../services/resize.service'
 
 const TABS = [
     {
@@ -110,6 +118,7 @@ const TABS = [
 export default {
     components: {
         VerticalPostThumbnail,
+        MobileTrendingPosts,
     },
     props: {
         posts: {
@@ -161,6 +170,12 @@ export default {
         },
         user () {
             return this.$store.state.user
+        },
+        device () {
+            return this.$store.state.device
+        },
+        mobile () {
+            return this.device === DEVICE_ENUM.MOBILE
         },
     },  
     methods: {
@@ -215,9 +230,6 @@ export default {
 </script>
 
 <style scoped>
-.code-preview {
-    height: 1000px;
-}
 .code-preview > .action-bar {
     top: 0;
     left: 0;
@@ -227,9 +239,9 @@ export default {
     z-index: 2;
 }
 .code-preview > .side-bar {
-    top: 30px;
+    top: 29px;
     left: 0;
-    height: calc(800px - 30px);
+    height: calc(800px - 29px);
     z-index: 2;
 }
 .code-preview > .side-bar > .side-bar-items {
@@ -255,14 +267,26 @@ export default {
     margin: .5rem .25rem;
 }
 .code-preview-content {
-    top: 60%;
-    left: 70px;
-    right: 0;
+    top: 65%;
+    left: calc(50% + 12.5px);
+    transform: translateX(-50%);
     width: 100%;
 }
 .view-more:hover {
     cursor: pointer;
     background-color: var(--primary-darker-color) !important;
     border-color: var(--primary-darker-color) !important;
+}
+
+@media screen and (min-width: 800px) {
+    .code-preview-content {
+        left: 70px;
+        top: 60%;
+        transform: none;
+    }
+    .code-preview > .side-bar {
+        top: 30px;
+        height: calc(800px - 30px);
+    }
 }
 </style>
