@@ -1,8 +1,13 @@
 <template>
-    <div class="bottom-sheet" 
+    <div class="bottom-sheet"
         ref="bottomSheet" 
         tabindex="0">
-        <div class="bottom-sheet-content bg-white" ref="bottomSheetContent">
+        <div v-if="isOpen" class="zen-dialog-overlay" @click="overlayClick">
+        </div>
+        <div class="bottom-sheet-content bg-white"
+            :class="{'brtc': rounded}" 
+            ref="bottomSheetContent"
+            :style="{width: width}">
             <zen-box class="close-btn pb-4" v-if="!loading">
                 <zen-button color="plain-grey" @click="close">
                     <span class="sr-only">Close</span>
@@ -27,14 +32,25 @@ export default {
         loading: {
             type: Boolean,
         },
+        width: {
+            type: String,
+            default: "100%"
+        },
+        height: {
+            type: String,
+            default: "100vh"
+        },
+        rounded: {
+            type: Boolean,
+        },
+        closeOnOverlayClick: {
+            type: Boolean,
+        },
     },
     data () {
         return {
             elementThatTriggered: null,
         }
-    },
-    components: {
-
     },
     watch: {
         isOpen (newVal) {
@@ -49,8 +65,8 @@ export default {
                         // TODO set open animation
                         const bottomSheetContent = this.$refs.bottomSheetContent
                         gsap.to(bottomSheetContent, {
-                            maxHeight: '100vh',
-                            height: '100vh',
+                            maxHeight: this.height,
+                            height: this.height,
                             duration: ANIMATION_SPEED,
                         })
                     }
@@ -75,10 +91,12 @@ export default {
             }
         }
     },
-    computed: {
-
-    },
     methods: {
+        overlayClick () {
+            if (this.closeOnOverlayClick) {
+                this.close()
+            }
+        },
         close () {
             this.$emit('close')
         },
@@ -116,12 +134,21 @@ export default {
 </script>
 
 <style scoped>
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
 .bottom-sheet-content {
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     max-height: 0px;
-    width: 100%;
     z-index: 15;
     display: flex;
     flex-direction: column;
@@ -130,5 +157,6 @@ export default {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    z-index: 15;
 }
 </style>

@@ -1,29 +1,48 @@
 <template>
-    <zen-dialog centered
-        height="400px" 
+    <bottom-sheet rounded
+        :width="mobile ? '100%' : '50%'"
+        height="75vh"
         :isOpen="isOpen" 
-        :closeOnOverlayClick="false">
-        <zen-dialog-header @close="close">
-            <h4 class="text-left">{{header}}</h4>
-        </zen-dialog-header>
-        <zen-dialog-body>
-            <app-loader v-if="loading" height="200px"/>
-            <zen-flex v-else-if="error" 
-                direction="column"
-                class="text-danger">
-                <zen-box>
-                    <span class="sr-only">Warning!</span>
-                    <v-icon :icon="['fas', 'exclamation-triangle']" size="2x"/>
+        :loading="loading || submitting"
+        @close="close">
+        <app-loader v-if="loading" height="200px"/>
+        <zen-box v-else-if="isOpen" 
+            class="stripe-container container"
+            position="relative"
+            h="100%"
+            :pl="mobile ? '1.5rem' : '2.5rem'"
+            :pr="mobile ? '1.5rem' : '2.5rem'">
+            <zen-box pt="2rem" mb="2rem">
+                <zen-text header="h5" align="left">{{header}}</zen-text>
+            </zen-box>
+            <zen-flex class="coffee-quantity p-2 mt-2 mb-2" 
+                align="center"
+                justify="center">
+                <zen-box f="0 0 25%" class="coffee-cup">
+                    <!-- COFFEE IMG -->
+                    <img src="https://via.placeholder.com/250" />
                 </zen-box>
-                <zen-box>
-                    <h4>Oh no!</h4>
+                <zen-box f="0 0 15%" class="times text-grey">
+                    <span class="sr-only">per</span>
+                    <zen-text color="gray">X</zen-text>
                 </zen-box>
-                <zen-box>
-                    {{errorMsg}}
+                <zen-box class="amounts"
+                    d="flex" 
+                    f="0 0 60%"
+                    justifyContent="center">
+                    <zen-button color="outline-primary"
+                        class="amount"
+                        :class="{active: amount.value == quantity}"
+                        :margin="{right: '.5rem', left:'.5rem'}"
+                        v-for="amount in amounts"
+                        :key="amount.value"
+                        @click="setQuantity(amount.value)">
+                        {{amount.value}}
+                    </zen-button>
                 </zen-box>
             </zen-flex>
-            <zen-box v-else class="stripe-container">
-                <zen-box mt=".75rem" mb=".75rem">
+            <zen-flex v-if="showInputs">
+                <zen-box f="0 0 50%" mt=".75rem" mb=".75rem">
                     <zen-input v-model="user.name"
                         variant="flushed" 
                         class="name mt-3 mb-3" 
@@ -36,7 +55,7 @@
                         :disabled="submitting || !elementsLoaded"
                     />
                 </zen-box>
-                <zen-box mt=".75rem" mb=".75rem">
+                <zen-box f="0 0 50%" ml=".5rem" mt=".75rem" mb=".75rem">
                     <zen-input v-model="user.email"
                         variant="flushed" 
                         class="user-email mt-3 mb-3" 
@@ -49,42 +68,64 @@
                         :disabled="submitting || !elementsLoaded"
                     />
                 </zen-box>
-                <zen-flex class="pt-4 pb-4">
-                    <zen-box f="0 0 100%" class="border-light-bottom border-2x">
-                        <div ref="stripeCardNumber"></div>
-                    </zen-box>
-                </zen-flex>
-                <zen-flex justify="center" class="pt-2 pb-2">
-                    <zen-box f="0 0 33%" class="ml-4 mr-4 border-light-bottom border-2x">
-                        <div ref="stripeCardExpiry"></div>
-                    </zen-box>
-                    <zen-box f="0 0 33%" class="border-light-bottom border-2x">
-                        <div ref="stripeCardCvc"></div>
-                    </zen-box>
-                </zen-flex>
+            </zen-flex>
+
+            <zen-flex v-if="showInputs" class="stripe-components pt-4 pb-4">
+                <zen-box f="0 0 100%" class="border-light-bottom border-2x">
+                    <div ref="stripeCardNumber"></div>
+                </zen-box>
+            </zen-flex>
+            <zen-flex v-if="showInputs" justify="center" class="stripe-components pt-2 pb-2">
+                <zen-box f="0 0 33%" class="ml-4 mr-4 border-light-bottom border-2x">
+                    <div ref="stripeCardExpiry"></div>
+                </zen-box>
+                <zen-box f="0 0 33%" class="border-light-bottom border-2x">
+                    <div ref="stripeCardCvc"></div>
+                </zen-box>
+            </zen-flex>
+
+            <zen-box v-if="showInputs" class="submit-container">
+                <zen-button class="submit-btn" 
+                    size="block"
+                    :isLoading="submitting" 
+                    :disabled="invalid || invalidUser || submitting"
+                    @click="confirm">
+                    Support Alex ({{amountDue}})
+                </zen-button>
             </zen-box>
-            
-            <zen-box v-if="invalid" class="text-danger pt-2">
+
+            <zen-box v-if="charging">
+                <app-loader height="200px"/>
+            </zen-box>
+        </zen-box>
+        <zen-flex v-else-if="error" 
+            direction="column"
+            class="text-danger">
+            <zen-box>
+                <span class="sr-only">Warning!</span>
+                <v-icon :icon="['fas', 'exclamation-triangle']" size="2x"/>
+            </zen-box>
+            <zen-box>
+                <h4>Oh no!</h4>
+            </zen-box>
+            <zen-box>
                 {{errorMsg}}
             </zen-box>
-        </zen-dialog-body>
-        <zen-dialog-footer position="absolute">
-            <zen-button color="plain" class="ml-2 mr-2" @click="close">{{cancelText}}</zen-button>
-            <zen-button size="lg"
-                :isLoading="submitting" 
-                :disabled="invalid || invalidUser || submitting" 
-                @click="confirm">
-                {{confirmText}}
-            </zen-button>
-        </zen-dialog-footer>
-    </zen-dialog>
+        </zen-flex>
+        
+        <zen-box v-if="invalid" class="text-danger pt-2">
+            {{errorMsg}}
+        </zen-box>
+    </bottom-sheet>
 </template>
 
 <script>
+import BottomSheet from './BottomSheet'
 import AppLoader from './AppLoader'
 import { hasValue, validEmail } from '../utils'
 import { loadStripe } from '@stripe/stripe-js'
 import environment from '../../environment'
+import { DEVICE_ENUM } from '../services/resize.service'
 
 const stripeCardStyle = {
   base: {
@@ -109,22 +150,16 @@ const stripeCardStyle = {
 
 const STATES = {
     LOADING: 'LOADING',
+    CHARGING: 'CHARGING',
     ERROR: 'ERROR',
     NONE: 'NONE',
     INVALID: 'INVALID',
     SUBMITTING: 'SUBMITTING',
 }
 
-// const STRIPE_ENUM = {
-//     CARD_NUMBER: 'cardNumber',
-//     CARD_CVC: 'cardCvc',
-//     CARD_EXPIRY: 'cardExpiry'
-// }
+const COFFEE_VALUE = 4
 
 export default {
-    components: {
-        AppLoader,
-    },
     props: {
         isOpen: {
             type: Boolean,
@@ -151,6 +186,18 @@ export default {
             errorMsg: null,
             user: {},
             elementsReady: {},
+            quantity: 0,
+            amounts: [
+                {
+                    value: 1,
+                },
+                {
+                    value: 3,
+                },
+                {
+                     value: 5,
+                }
+            ]
         }
     },
     watch: {
@@ -163,9 +210,16 @@ export default {
             }
         },
     },
+    components: {
+        AppLoader,
+        BottomSheet
+    },
     computed: {
         loading () {
             return this.state === STATES.LOADING
+        },
+        charging () {
+            return this.state === STATES.charging
         },
         error () {
             return this.state === STATES.ERROR
@@ -190,19 +244,31 @@ export default {
         },
         elementsLoaded () {
             return Object.keys(this.stripeEl).every(k => this.stripeEl[k].ready)
-        }
-    },
-    beforeDestroy () {
-        this.stripe = null  
+        },
+        device () {
+            return this.$store.state.device
+        },
+        mobile () {
+            return this.device === DEVICE_ENUM.MOBILE
+        },
+        amountDue () {
+            return `$${COFFEE_VALUE*this.quantity}.00`
+        },
+        showInputs () {
+            return !this.charging && this.quantity > 0
+        },
     },
     methods: {
         async init () {
             this.stripe = await loadStripe(environment.STRIPE_KEY)
-            const hasCharge = await this.charge()
-            if (hasCharge) {
-                this.state = STATES.INVALID
-                this.injectStripeElements()
+        },
+        async setQuantity (val) {
+            if (!isNaN(val)) {
+                this.quantity = parseInt(val.toString(), 10)
+            } else {
+                this.quantity = 1
             }
+            await this.setCharge()
         },
         close () {
             this.$emit('close')
@@ -247,11 +313,8 @@ export default {
         },
         clean () {
             this.user = {}
+            this.quantity = 0
             if (this.stripeEl) {
-                Object.keys(this.stripeEl).forEach(key => {
-                    const el = this.stripeEl[key].el
-                    el.destroy()
-                })
                 this.stripe = null
             }
         },
@@ -273,10 +336,17 @@ export default {
                 el.update({disabled: val})
             })
         },
-        async charge () {
+        async setCharge () {
+            const hasCharge = await this.charge(this.quantity)
+            if (hasCharge) {
+                this.state = STATES.INVALID
+                this.injectStripeElements()
+            }
+        },
+        async charge (quantity) {
             try {
-                this.state = STATES.LOADING
-                const { success, paymentIntent } = await this.$userService.charge()
+                this.state = STATES.CHARGING
+                const { success, paymentIntent } = await this.$userService.charge({quantity})
                 if (success) {
                     this.paymentIntent = paymentIntent
                     this.state = STATES.NONE
@@ -334,10 +404,62 @@ export default {
 </script>
 
 <style scoped>
-h4 {
-    margin: 0;
+.coffee-cup > img {
+    width: 100%;
+    height: 100%;
+    max-width: 75px;
+    max-height: 75px;
 }
-/* #stripeEl {
-    border-bottom: 2px solid var(--gray-lighter-color);
-} */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number].quantity-input {
+  -moz-appearance: textfield;
+}
+
+.coffee-quantity {
+    background-color: var(--primary-super-light);
+    border-color: var(--primary-color);
+    border-style: solid;
+    border-width: 1px;
+}
+
+.amount {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+.amount.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+.submit-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+}
+.submit-container > .submit-btn {
+    height: 100%;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 800px) {
+}
+@media screen and (min-width: 800px) {
+  .amount {
+    height: 50px;
+    width: 50px;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1023px) {
+}
+@media screen and (min-width: 1024px) {
+}
 </style>
