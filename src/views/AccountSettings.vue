@@ -88,6 +88,14 @@
                             More Settings
                         </zen-accordion-header>
                         <zen-accordion-content>
+                            <zen-flex v-if="hasBookmarks"
+                                align="center" 
+                                justify="space-between">
+                                <zen-text>View Bookmarks</zen-text>
+                                <zen-button color="plain-accent" @click="openBookmarks">
+                                    Open
+                                </zen-button>
+                            </zen-flex>
                             <zen-flex align="center" v-if="!different">
                                 <zen-text>Change your password</zen-text>
                                 <zen-box f="0 0 50%" ml="auto">
@@ -170,11 +178,11 @@
                 :isOpen="deleteDialogOpen"
                 @cancel="closeDeleteDialog"
                 @confirm="deleteUser" />
-            <zen-box class="bookmark-btn" v-if="hasBookmarks">
+            <!-- <zen-box class="bookmark-btn" v-if="hasBookmarks">
                 <zen-button color="accent" @click="openBookmarks">
                     Open Bookmarks
                 </zen-button>
-            </zen-box>
+            </zen-box> -->
 
             <bookmarks :posts="bookmarkedPosts" 
                 :isOpen="showBookmarks" 
@@ -332,7 +340,7 @@ export default {
         },
         openBookmarks () {
             this.showBookmarks = true
-            setTimeout(this._loadBookmarks.bind(this), 700)
+            setTimeout(this._loadBookmarks.bind(this), 600)
         },
         closeBookmarks () {
             this.showBookmarks = false
