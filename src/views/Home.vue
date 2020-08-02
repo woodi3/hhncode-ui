@@ -1,7 +1,11 @@
 <template>
     <zen-box>
+        <trending-posts class="hide-on-mobile"
+            :posts="trendingPosts" 
+            :loading="loading" />
 
-        <trending-posts :posts="trendingPosts" 
+        <mobile-trending-posts class="hide-on-desktop hide-on-ipad"
+            :posts="trendingPosts"
             :loading="loading" />
 
         <latest-posts :posts="latestPosts" 
@@ -11,43 +15,17 @@
         <code-preview :posts="codePosts" 
             :loading="loading" 
             :isAuthenticated="isAuthenticated" />
-        <!-- Trending posts -->
-        <!-- <snapshot title="Trending" 
-            bg="primary-dark"
-            skew
-            titleColorClass="text-white"
-            dividerColor="primary-light" 
-            :posts="trendingPosts" 
-            :loading="loading"/> -->
 
         <!-- Album review for desktop -->
         <album-reviews :albumReviews="albumReviews" 
             :loading="loading"/>
-        <!-- Album reviews for mobile and ipad -->
-        <!-- <snapshot class="hide-on-desktop" 
-            title="Recent Album Reviews"
-            titleColorClass="text-black" 
-            :posts="albumReviews"  
-            :loading="loading" /> -->
-        
-        <!-- Tutorial snap shots for ipad and desktop -->
-        <!-- <tutorial-snapshot 
-            class="hide-on-mobile" 
-            :tutorials="tutorials" 
-            :loading="loading"/> -->
-        
-        <!-- Tutorial snap shot for mobile -->
-        <!-- <snapshot class="hide-on-ipad hide-on-desktop"
-            title="Recent Tutorials" 
-            titleColorClass="text-black"
-            :posts="tutorials" 
-            :loading="loading"/> -->
     </zen-box>
 </template>
 
 <script>
 import LatestPosts from '../components/LatestPosts'
 import TrendingPosts from '../components/TrendingPosts'
+import MobileTrendingPosts from '../components/MobileTrendingPosts'
 import CodePreview from '../components/CodePreview'
 
 // import Snapshot from '../components/Snapshot'
@@ -63,6 +41,7 @@ export default {
         // TutorialSnapshot,
         LatestPosts,
         TrendingPosts,
+        MobileTrendingPosts,
         CodePreview,
     },
     data () {

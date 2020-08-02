@@ -6,8 +6,8 @@
                 <v-icon :icon="['fas', 'bars']" />
             </zen-button>
         </zen-box>
-        <zen-box f="0 0 50%">
-            <logo class="logo"/>
+        <zen-box f="0 0 50%" d="flex" justifyContent="center">
+            <logo class="logo" width="135px" height="89.25px"/>
         </zen-box>
         <zen-box f="0 0 25%" class="search-container">
             <zen-button v-if="!hideSearch"
