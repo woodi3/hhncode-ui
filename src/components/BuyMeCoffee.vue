@@ -7,21 +7,30 @@
             title="Buy Me a Coffee :)"
             @click="handleClick">
 
-        <stripe-dialog header="Buy me coffee" 
+        <!-- <stripe-dialog header="Buy me coffee" 
             :isOpen="stripeOpen" 
             :confirmText="'$3.99'"
             @close="close"
             @confirm="confirm">
-        </stripe-dialog>
+        </stripe-dialog> -->
+        <stripe-bottom-sheet 
+            header="Buy Alex a coffee" 
+            :isOpen="stripeOpen" 
+            :confirmText="'$3.99'"
+            @close="close"
+            @confirm="confirm"
+        />
     </zen-flex>
 </template>
 
 <script>
-import StripeDialog from './StripeDialog'
+// import StripeDialog from './StripeDialog'
+import StripeBottomSheet from './StripeBottomSheet'
 
 export default {
     components: {
-        StripeDialog,
+        // StripeDialog,
+        StripeBottomSheet,
     },
     data () {
         return {
@@ -38,7 +47,6 @@ export default {
         },
         confirm () {
             this.close()
-            console.log('Confirm clicked');
         }
     }
 }
@@ -49,8 +57,8 @@ export default {
     text-decoration: none;
 }
 .coffee > img {
-    height: 41px !important;
-    width: 174px !important;
+    height: 52px !important;
+    width: 218px !important;
 }
 .coffee > img:hover {
     cursor: pointer;
