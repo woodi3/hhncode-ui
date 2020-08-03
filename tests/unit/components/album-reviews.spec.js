@@ -1,6 +1,6 @@
 /*eslint-env node, jest */
-import { getMountedComponent, zenTags, mockPosts } from '../helpers'
-import AlbumReviewsComponent from '../../src/components/AlbumReviews.vue'
+import { getMountedComponent, zenTags, mockPosts } from '../../helpers'
+import AlbumReviewsComponent from '../../../src/components/AlbumReviews.vue'
 
 describe('Component | Album Reviews', () => {
     let component;

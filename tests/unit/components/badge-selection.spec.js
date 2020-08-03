@@ -1,6 +1,6 @@
 /*eslint-env node, jest */
-import { getMountedComponent, zenTags } from '../helpers'
-import BadgeSelectionComponent from '../../src/components/BadgeSelection.vue'
+import { getMountedComponent, zenTags } from '../../helpers'
+import BadgeSelectionComponent from '../../../src/components/BadgeSelection.vue'
 
 const BADGES = [
     {

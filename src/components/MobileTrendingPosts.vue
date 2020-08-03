@@ -25,9 +25,9 @@
                 </zen-box>
                 <zen-box class="mobile-trending-post-info-container" 
                     pl="1rem">
-                    <zen-text header="h7" @click.native="goToDetail(currentPost)">{{currentPost.title}}</zen-text>
+                    <zen-text class="post-title" header="h7" @click.native="goToDetail(currentPost)">{{currentPost.title}}</zen-text>
                     <zen-box v-if="currentPost.meta" mt="1rem" @click.native="goToDetail(currentPost)">
-                        <zen-text italic>{{currentPost.meta.subtitle}}</zen-text>
+                        <zen-text class="post-subtitle" italic>{{currentPost.meta.subtitle}}</zen-text>
                     </zen-box>
                     <zen-box v-if="posts.length > 1"
                         class="arrows" 

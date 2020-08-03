@@ -1,7 +1,7 @@
 /*eslint-env node, jest */
-import { getMountedComponent, zenTags } from '../helpers'
+import { getMountedComponent, zenTags } from '../../helpers'
 import dayjs from 'dayjs'
-import AuthorComponent from '../../src/components/Author.vue'
+import AuthorComponent from '../../../src/components/Author.vue'
 
 const DEFAULT_DATE = "Oct 15"
 

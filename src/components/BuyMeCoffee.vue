@@ -6,13 +6,7 @@
             alt="Buy Me A Coffee"
             title="Buy Me a Coffee :)"
             @click="handleClick">
-
-        <!-- <stripe-dialog header="Buy me coffee" 
-            :isOpen="stripeOpen" 
-            :confirmText="'$3.99'"
-            @close="close"
-            @confirm="confirm">
-        </stripe-dialog> -->
+            
         <stripe-bottom-sheet 
             header="Buy Alex a coffee" 
             :isOpen="stripeOpen" 
@@ -24,12 +18,10 @@
 </template>
 
 <script>
-// import StripeDialog from './StripeDialog'
 import StripeBottomSheet from './StripeBottomSheet'
 
 export default {
     components: {
-        // StripeDialog,
         StripeBottomSheet,
     },
     data () {

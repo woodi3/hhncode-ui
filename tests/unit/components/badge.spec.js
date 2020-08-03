@@ -1,6 +1,6 @@
 /*eslint-env node, jest */
-import { getMountedComponent } from '../helpers'
-import BadgeComponent from '../../src/components/Badge.vue'
+import { getMountedComponent } from '../../helpers'
+import BadgeComponent from '../../../src/components/Badge.vue'
 
 describe('Component | Badge', () => {
     let component;

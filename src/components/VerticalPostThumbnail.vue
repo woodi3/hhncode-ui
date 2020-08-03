@@ -14,9 +14,9 @@
             :text="tag.text"
             :color="tag.color"/>
         </zen-flex>
-        <h3 class="mt-3 mb-3">{{post.title}}</h3>
+        <h3 class="mt-3 mb-3 post-title">{{post.title}}</h3>
         <zen-text v-if="post.meta && post.meta.subtitle" 
-            class="subtitle mt-2 mb-2"
+            class="post-subtitle mt-2 mb-2"
             italic>
             {{post.meta.subtitle}}
         </zen-text>
