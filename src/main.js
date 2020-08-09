@@ -36,7 +36,6 @@ import ZenBox from './components/ZenBox'
 import ZenGrid from './components/ZenGrid'
 import ZenFlex from './components/ZenFlex'
 import ZenSpinner from './components/ZenSpinner'
-import ZenTable from './components/ZenTable/ZenTable'
 import ZenFormControl from './components/ZenFormControl/ZenFormControl'
 import ZenLabel from './components/ZenFormControl/ZenInputLabel'
 import ZenInput from './components/ZenFormControl/ZenInput'
@@ -100,7 +99,6 @@ const Components = {
   ZenInputElement,
   ZenInputHelper,
   ZenSpinner,
-  ZenTable,
   ZenLabel,
   ZenTextarea,
   ZenText,
