@@ -10,7 +10,7 @@
                 <img :src="post.headerImg" :alt="headerImgAltText">
             </zen-box>
             <zen-box f="0 0 67%" class="post-content pl-2 pt-4">
-                <zen-text header="h7">{{post.title}}</zen-text>
+                <zen-text class="post-title" header="h7">{{post.title}}</zen-text>
                 <zen-text v-if="post.meta && post.meta.subtitle" 
                     class="subtitle mt-2 mb-2"
                     italic>

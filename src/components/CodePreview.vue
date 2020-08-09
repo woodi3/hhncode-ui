@@ -66,7 +66,6 @@
                     <span class="sr-only">{{animatedText}}</span>
                 </zen-text>
             </zen-box>
-            <!-- TODO when on mobile use carosuel -->
             <zen-box class="code-preview-content"
                 position="absolute">
                 <zen-flex class="hide-on-mobile">

@@ -1,7 +1,7 @@
 <template>
     <zen-box class="comment">
         <zen-flex class="author mb-2" align="center">
-            <zen-text bold>
+            <zen-text bold class="name">
                 {{comment.name}}
             </zen-text>
             <zen-text class="ml-2" color="dark-gray" fontSize="sm">
@@ -14,7 +14,7 @@
         <zen-flex v-if="showViewMore" 
             class="view-more pt-2 pb-2" 
             justify="center">
-            <zen-button class="text-dark-gray" 
+            <zen-button class="view-more-btn text-dark-gray" 
                 color="plain"
                 :ariaLabel="viewMore ? 'Show less' : 'View more'"
                 @click="toggleViewMore">

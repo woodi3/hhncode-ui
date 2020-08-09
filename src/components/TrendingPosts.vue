@@ -29,11 +29,11 @@
                     position="absolute"
                     @click.native="goToDetail(currentPost)">
                     <zen-box class="trending-post-info-container">
-                        <zen-text header="h4">{{currentPost.title}}</zen-text>
+                        <zen-text class="post-title" header="h4">{{currentPost.title}}</zen-text>
                         <zen-box v-if="currentPost.meta" 
                             w="75%"
                             mt="1rem">
-                            <zen-text italic>{{currentPost.meta.subtitle}}</zen-text>
+                            <zen-text class="post-subtitle" italic>{{currentPost.meta.subtitle}}</zen-text>
                         </zen-box>
                         <zen-box w="50%" mt="1rem">
                             <zen-flex class="badge-container">
