@@ -2,10 +2,11 @@
     <zen-flex class="coffee pt-10 pb-10" 
         align="center" 
         justify="center">
-        <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" 
-            alt="Buy Me A Coffee"
-            title="Buy Me a Coffee :)"
-            @click="handleClick">
+        <zen-box f="0 0 50%">
+            <zen-button size="block" color="accent" class="buy-me-coffee-btn" @click="handleClick">
+                Buy Alex Coffee
+            </zen-button>
+        </zen-box>
             
         <stripe-bottom-sheet 
             header="Buy Alex a coffee" 
@@ -48,11 +49,10 @@ export default {
 .coffee {
     text-decoration: none;
 }
-.coffee > img {
-    height: 52px !important;
-    width: 218px !important;
-}
-.coffee > img:hover {
-    cursor: pointer;
+
+.buy-me-coffee-btn {
+    height: 80px;
+    font-weight: bold;
+    font-size: calc(var(--font-size) * 1.05);
 }
 </style>
