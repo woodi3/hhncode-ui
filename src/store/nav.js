@@ -51,7 +51,7 @@ export default {
                 to: '/home',
             },
             {
-                label: 'Hip-Hop',
+                label: 'Hip Hop',
                 to: '/hiphop',
             },
             {

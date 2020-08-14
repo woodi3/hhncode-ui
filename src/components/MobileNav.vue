@@ -1,7 +1,7 @@
 <template>
     <zen-flex align="center" wrap="wrap" class="container mt-3 pb-3">
         <zen-box f="0 0 25%">
-            <zen-button color="plain" @click="toggleNav">
+            <zen-button class="menu-btn" color="plain" @click="toggleNav">
                 <span class="sr-only">Menu</span>
                 <v-icon :icon="['fas', 'bars']" />
             </zen-button>

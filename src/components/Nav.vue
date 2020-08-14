@@ -7,7 +7,7 @@
         <zen-box f="0 0 100%" class="text-center">
             <logo text/>
         </zen-box>
-        <zen-box mt="1rem" f="0 0 100%" d="flex" justifyContent="center">
+        <zen-box class="nav-items" mt="1rem" f="0 0 100%" d="flex" justifyContent="center">
             <template v-for="link in links">
                 <nav-item v-if="showNavItem(link)"
                     :key="link.to" 
@@ -30,12 +30,12 @@
             </template>
             <zen-button v-if="!isAuthenticated" 
                 color="accent"
-                class="ml-1 mr-1" 
+                class="action-btn ml-1 mr-1" 
                 :ariaLabel="isNewAccount ? 'Join us button' : 'Login button'"
                 @click="pushAuthRoute">
                 {{isNewAccount ? 'Login' : 'Join us'}}
             </zen-button>
-            <zen-button class="ml-1 mr-1"
+            <zen-button class="search-btn ml-1 mr-1"
                 color="plain"
                 ariaLabel="Search button" 
                 :class="isActive('/search') ? '' : 'text-black'"

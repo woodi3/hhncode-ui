@@ -1,5 +1,5 @@
 <template>
-    <zen-flex direction="column" align="center">
+    <zen-flex class="drawer-nav" direction="column" align="center">
         <zen-box class="close-btn">
           <zen-button color="plain-danger" @click="close">
             <span class="sr-only">Close</span>  
@@ -7,8 +7,7 @@
           </zen-button>
         </zen-box>
         <template v-for="link in links">
-            <nav-item class="nav-item"
-                v-if="showNavItem(link)"
+            <nav-item v-if="showNavItem(link)"
                 :key="link.to" 
                 :label="link.label" 
                 :to="link.to" 
