@@ -1,10 +1,10 @@
 <template>
     <zen-box>
-        <trending-posts class="hide-on-mobile"
+        <trending-posts v-if="!isMobile"
             :posts="trendingPosts" 
             :loading="loading" />
 
-        <mobile-trending-posts class="hide-on-desktop hide-on-ipad"
+        <mobile-trending-posts v-else
             :posts="trendingPosts"
             :loading="loading" />
 
@@ -30,6 +30,7 @@ import CodePreview from '../components/CodePreview'
 
 // import Snapshot from '../components/Snapshot'
 import AlbumReviews from '../components/AlbumReviews'
+import { DEVICE_ENUM } from '../services/resize.service'
 // import TutorialSnapshot from '../components/TutorialSnapshot'
 
 const LIMIT = 4
@@ -59,6 +60,12 @@ export default {
     computed: {
         isAuthenticated () {
             return this.$store.state.isAuthenticated
+        },
+        device () {
+            return this.$store.state.device
+        },
+        isMobile () {
+            return this.device === DEVICE_ENUM.MOBILE
         },
     },
     methods: {

@@ -1,5 +1,6 @@
 <template>
     <zen-box v-if="!loading"
+        class="mobile-trending-post"
         mt="2rem"
         mb="5rem"
         d="flex" 
@@ -36,11 +37,13 @@
                         mb="1rem"
                         ml=".5rem"
                         justifyContent="flex-end">
-                        <zen-button color="plain-black"
+                        <zen-button class="prev-btn"
+                            color="plain-black"
                             @click="back">
                             <v-icon :icon="['fas', 'chevron-left']"/>
                         </zen-button>
-                        <zen-button color="plain-black"
+                        <zen-button class="next-btn"
+                            color="plain-black"
                             @click="next">
                             <v-icon :icon="['fas', 'chevron-right']"/>
                         </zen-button>

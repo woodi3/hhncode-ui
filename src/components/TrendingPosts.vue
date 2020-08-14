@@ -6,7 +6,7 @@
         h="600px"
         tabIndex="0"
         @keydown.native="handleKeydown">
-        <zen-box class="trending-post-info" 
+        <zen-box class="trending-post-info-outer-container" 
             bg="gray-light" 
             w="700px"
             h="500px"
@@ -210,7 +210,7 @@ export default {
 .trending-posts-container:focus {
     outline: none;
 }
-.trending-posts-container > .trending-post-info {
+.trending-posts-container > .trending-post-info-outer-container {
     left: 15%;
     top: 0;
 }
@@ -219,7 +219,7 @@ export default {
     top: 10%;
 }
 .trending-posts-container > 
-.trending-post-info > 
+.trending-post-info-outer-container > 
 .trending-text-container > 
 .trending-post-info {
     z-index: 2;
