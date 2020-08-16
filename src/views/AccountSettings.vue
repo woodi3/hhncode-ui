@@ -42,8 +42,8 @@
                         <zen-input
                             v-model="userCopy.email"
                             variant="flushed" 
-                            class="name mt-3 mb-1" 
-                            name="user-emai" 
+                            class="email mt-3 mb-1" 
+                            name="user-email" 
                             placeholder="Your email" 
                             ariaLabel="Your email"
                             type="email"
@@ -71,17 +71,18 @@
                 </zen-box>
             </zen-flex>
             <zen-flex class="actions" direction="row" justify="center">
-                <zen-button size="block" 
+                <zen-button class="save-btn"
+                    size="block" 
                     :disabled="!different || disableSave"
                     :isLoading="saving"
                     @click="save">
                         Save
                 </zen-button>
             </zen-flex>
-            <zen-flex justify="center">
+            <zen-flex justify="center" class="more-settings">
                 <zen-box f="0 0 75%" mt="1rem">
                     <zen-accordion maxHeight="300px" :isOpen="moreSettingsOpts.open">
-                        <zen-accordion-header 
+                        <zen-accordion-header
                             :icons="moreSettingsOpts.icons"
                             @open="openSettingsAccordion"
                             @close="closeSettingsAccordion">
@@ -107,7 +108,10 @@
                                 justify="space-between" 
                                 align="center">
                                 <zen-text>Sign out</zen-text>
-                                <zen-button color="plain-accent" @click="logout" :disabled="saving">
+                                <zen-button class="sign-out-btn"
+                                    color="plain-accent" 
+                                    @click="logout" 
+                                    :disabled="saving">
                                     Sign out
                                 </zen-button>
                             </zen-flex>

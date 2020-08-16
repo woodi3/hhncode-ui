@@ -45,10 +45,13 @@
             </zen-box>
 
             <zen-flex class="actions" direction="row" justify="center">
-                <zen-button size="block" 
+                <zen-button class="login-btn"
+                size="block" 
                 :disabled="disableLogin" 
                 @click="login"
-                :isLoading="isLoading">Login</zen-button>
+                :isLoading="isLoading">
+                    Login
+                </zen-button>
             </zen-flex>
 
             <zen-flex class="mt-3" align="center" justify="center">
