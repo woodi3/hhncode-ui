@@ -33,7 +33,11 @@
                     responsive
                     v-for="post in posts"
                     :key="post._id">
-                    <post-thumbnail :post="post" @click.native="goToDetail(post)" @enterPressed="goToDetail(post)"/>
+                    <vertical-post-thumbnail :post="post" 
+                        :isAuthenticated="isAuthenticated"
+                        :bookmarked="bookmarked(post)"
+                        @click="goToDetail(post)"
+                        @enterPressed="goToDetail(post)"/>
                 </zen-box>
             </template>
             
@@ -47,13 +51,13 @@
 <script>
 import Search from './Search'
 import BadgeSelection from './BadgeSelection'
-import PostThumbnail from './PostThumbnail'
+import VerticalPostThumbnail from './VerticalPostThumbnail'
 
 export default {
     components: {
         Search,
         BadgeSelection,
-        PostThumbnail,
+        VerticalPostThumbnail,
     },
     props: {
         tags: {
@@ -102,11 +106,19 @@ export default {
         hideSearch: {
             type: Boolean,
         },
+        isAuthenticated: {
+            type: Boolean,
+        },
     },
     data () {
         return {
             searchVal: '',
         }
+    },
+    computed: {
+        user () {
+            return this.$store.state.user
+        },
     },
     methods: {
         toggleTag (tag) {
@@ -118,7 +130,11 @@ export default {
         },
         goToDetail(post) {
             this.$router.push({name: 'detail', query: {title: post.title, _id: post._id}})
-        }
+        },
+        bookmarked (post) {
+            return this.user && this.user.bookmarks && this.user.bookmarks.indexOf(post._id) > -1
+        },
+        
     }
 }
 </script>

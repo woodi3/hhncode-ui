@@ -21,6 +21,7 @@
         :invalidSearch="invalidSearch"
         :searchLoading="isSearching"
         :loading="loading"
+        :isAuthenticated="isAuthenticated"
         @toggleTag="toggleTag"
         @search="startSearch"
        />
@@ -90,7 +91,10 @@ export default {
                 invalid: this.searchVal.length < MIN_SEARCH && this.startedSearching,
                 message: `Search needs at least 2 characters`
             }
-        }
+        },
+        isAuthenticated () {
+            return this.$store.state.isAuthenticated
+        },
     },
     methods: {
         hideFooter () {

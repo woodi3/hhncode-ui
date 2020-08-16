@@ -19,7 +19,7 @@
                 <zen-spinner size="sm" />
             </zen-input-element>
         </zen-input-group>
-        <zen-error-message v-if="invalid">
+        <zen-error-message v-if="invalid" class="search-error">
             <span>{{errorMessage}}</span>
         </zen-error-message>
     </zen-box>
