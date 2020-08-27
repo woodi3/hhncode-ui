@@ -1,5 +1,5 @@
 <template>
-    <zen-flex class="nav fixed top-center uppercase bg-white" 
+    <zen-flex class="nav fixed top-center uppercase" 
         align="center" 
         justify="center"
         direction="row"
@@ -25,20 +25,19 @@
                     :label="link.label" 
                     :to="link.to"
                     :icon="link.icon"
-                    :accent="link.accent" 
+                    :primary="link.primary" 
                     :active="isActive(link.to)"/>
             </template>
             <zen-button v-if="!isAuthenticated" 
-                color="accent"
+                primary
                 class="ml-1 mr-1" 
                 :ariaLabel="isNewAccount ? 'Join us button' : 'Login button'"
                 @click="pushAuthRoute">
                 {{isNewAccount ? 'Login' : 'Join us'}}
             </zen-button>
             <zen-button class="ml-1 mr-1"
-                color="plain"
                 ariaLabel="Search button" 
-                :class="isActive('/search') ? '' : 'text-black'"
+                :class="isActive('/search') ? 'text-black' : ''"
                 @click="goToSearch">
                 <span class="sr-only">Search</span>
                 <v-icon :icon="['fas', 'search']" size="lg"/>

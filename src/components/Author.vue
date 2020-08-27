@@ -25,7 +25,7 @@
             <zen-box pl=".5rem" pr=".5rem" class="icon" v-if="showBookmark">
                 <zen-button color="plain" @click="toggleBookmark">
                     <span class="sr-only">{{bookmarked ? 'Remove Bookmark' : 'Bookmark'}}</span>
-                    <v-icon :class="[bookmarked ? 'text-primary' : '']" :icon="[ bookmarked ? 'fas' : 'far', 'bookmark']" size="lg"/>
+                    <v-icon :class="[bookmarked ? 'text-accent' : '']" :icon="[ bookmarked ? 'fas' : 'far', 'bookmark']" size="lg"/>
                 </zen-button>
             </zen-box>
         </zen-flex>

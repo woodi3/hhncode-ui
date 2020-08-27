@@ -17,7 +17,7 @@
         </template>
         <zen-button v-if="!hideActionButton"
             class="ml-1 mr-1 mt-3"
-            color="accent" 
+            primary
             ariaLabel="Join us button" 
             @click="triggerAction">
             {{actionButtonText}}

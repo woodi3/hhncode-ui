@@ -74,7 +74,7 @@
                 <zen-text fontSize="sm" class="mr-1">
                     Already joined?
                 </zen-text>
-                <zen-link to="/login" fontSize="sm">Login</zen-link>
+                <zen-link accent to="/login" fontSize="sm">Login</zen-link>
             </zen-flex>
         </card>
     </zen-flex>

@@ -148,7 +148,7 @@ export default {
     padding-left: 1rem;
     padding-right: 1rem;
     height: 2.5rem;
-    background-color: var(--white-color);
+    background-color: var(--color-1);
     transition: all 0.2s ease 0s;
     outline: none;
     border-style: solid;

@@ -58,7 +58,8 @@
                 w="33%" 
                 mt="1rem" 
                 position="absolute">
-                <zen-button color="plain-black"
+                <zen-button class="mr-2"
+                    color="plain-black"
                     @click="back">
                     <v-icon :icon="['fas', 'chevron-left']"/>
                 </zen-button>

@@ -19,7 +19,16 @@ export default {
         color: {
             type: String,
             required: false,
-            default: `primary`
+            default: `default`
+        },
+        primary: {
+            type: Boolean,
+        },
+        outline: {
+            type: Boolean,
+        },
+        light: {
+            type: Boolean,
         },
         size: {
             type: String,
@@ -72,35 +81,19 @@ export default {
     },
     computed: {
         btnColorClass () {
-            switch (this.color.toLowerCase()) {
-                case `primary`:
-                    return `btn-primary`
-                case `accent`:
-                    return `btn-accent`
-                case `danger`:
-                    return `btn-danger`
-                case `plain`:
-                    return `btn-plain`
-                case `plain-primary`: 
-                    return `btn-plain text-primary`
-                case `plain-accent`:
-                    return `btn-plain text-accent`
-                case `plain-grey`:
-                case `plain-gray`:
-                    return `btn-plain text-gray`
-                case `plain-black`:
-                    return `btn-plain text-black`
-                case `plain-danger`:
-                    return `btn-plain text-danger`
-                case `primary-outline`:
-                case `outline-primary`:
-                    return `btn-outline-primary`
-                case `accent-outline`:
-                case `outline-accent`:
-                    return `btn-outline-accent`
-                default:
-                    return `btn-primary`
+            if (this.primary) {
+                if (this.outline){
+                    return 'zen-btn-primary zen-btn-outline'
+                }
+                return 'zen-btn-primary'
+            } 
+            if (this.outline) {
+                if (this.light) {
+                    return 'zen-btn-default zen-btn-outline light'
+                }
+                return 'zen-btn-default zen-btn-outline dark'
             }
+            return 'zen-btn-default'
         },
         btnSizeClass () {
             switch (this.size.toLowerCase()) {
@@ -123,7 +116,7 @@ export default {
             return [
                 `zen-btn`,
                 `zen-${this.btnSizeClass}`,
-                `zen-${this.btnColorClass}`,
+                this.btnColorClass,
                 this.btnDisabled ? `disabled` : ``
             ]
         },
@@ -172,8 +165,9 @@ export default {
     /* border-radius: .25rem; */
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.zen-btn:hover {
+.zen-btn:hover:not(:disabled):not(.disabled) {
     text-decoration: none;
+    box-shadow: var(--shadow);
 }
 .zen-btn:focus {
     outline: none;
@@ -188,29 +182,53 @@ export default {
     padding: .5rem 1rem;
     font-size: 1.25rem;
     line-height: 1.5;
-    border-radius: .25rem;
+    /* border-radius: .25rem; */
 }
 .zen-btn-sm {
     padding: .25rem .5rem;
     font-size: .75rem;
     line-height: 1.5;
-    border-radius: .25rem;
+    /* border-radius: .25rem; */
 }
 .zen-btn-block {
     width: 100%;
 }
+.zen-btn-default {
+    color: var(--color-3);
+    background-color: var(--color-1);
+}
+.zen-btn-default:hover:not(:disabled):not(.disabled) {
+    color: var(--color-4);
+    /* border-color: var(--color-3); */
+    box-shadow: var(--shadow);
+}
+.zen-btn-default.zen-btn-outline.dark {
+    background-color: transparent;
+    border-color: var(--color-3);
+}
+.zen-btn-default.zen-btn-outline.dark:hover:not(:disabled):not(.disabled) {
+    color: var(--color-4);
+    border-color: var(--color-4);
+}
+.zen-btn-default.zen-btn-outline.light {
+    background-color: transparent;
+    border-color: var(--color-1);
+    color: var(--color-1);
+}
+.zen-btn-default.zen-btn-outline.light:hover:not(:disabled):not(.disabled) {
+    color: var(--color-3);
+    background-color: var(--color-1);
+}
+
 .zen-btn-primary {
     color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 .zen-btn-primary:hover:not(:disabled):not(.disabled) {
     color: #fff;
-    background-color: var(--primary-darker-color);
-    border-color: var(--primary-darker-color);
-}
-.zen-btn-primary:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--primary-super-light);
+    /* background-color: var(--primary-darker-color);
+    border-color: var(--primary-darker-color); */
 }
 .zen-btn-outline-primary {
     color: var(--primary-color);
@@ -274,60 +292,5 @@ export default {
 }
 .zen-btn-danger:focus:not(:disabled):not(.disabled) {
     box-shadow: 0 0 0 0.2rem var(--danger-rgb-light);
-}
-
-.zen-btn-plain {
-    font-weight: 400;
-    font-size: inherit;
-    color: var(--primary-color);
-    background-color: transparent;
-}
-.zen-btn-plain:hover:not(:disabled):not(.disabled) {
-    background-color: var(--primary-super-light);
-}
-.zen-btn-plain:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--primary-super-light);
-}
-.zen-btn-plain.text-accent:hover:not(:disabled):not(.disabled) {
-    background-color: var(--accent-rgb-light);
-}
-.zen-btn-plain.text-accent:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--accent-rgb-light);
-}
-.zen-btn-plain.text-gray:hover:not(:disabled):not(.disabled) {
-    background-color: var(--gray-lighter-color);
-}
-.zen-btn-plain.text-gray:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
-}
-.zen-btn-plain.text-dark-gray:hover:not(:disabled):not(.disabled) {
-    background-color: var(--gray-lighter-color);
-}
-.zen-btn-plain.text-dark-gray:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
-}
-.zen-btn-plain.text-grey:hover:not(:disabled):not(.disabled) {
-    background-color: var(--gray-lighter-color);
-}
-.zen-btn-plain.text-grey:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
-}
-.zen-btn-plain.text-dark-grey:hover:not(:disabled):not(.disabled) {
-    background-color: var(--gray-lighter-color);
-}
-.zen-btn-plain.text-dark-grey:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--gray-rgb-light);
-}
-.zen-btn-plain.text-black:hover:not(:disabled):not(.disabled) {
-    background-color: var(--gray-lighter-color);
-}
-.zen-btn-plain.text-black:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--shadow-rgb);
-}
-.zen-btn-plain.text-danger:focus:not(:disabled):not(.disabled) {
-    box-shadow: 0 0 0 0.2rem var(--danger-rgb-light);
-}
-.zen-btn-plain.text-danger:hover:not(:disabled):not(.disabled) {
-    background-color: var(--danger-rgb-light);
 }
 </style>

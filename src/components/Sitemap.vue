@@ -3,17 +3,17 @@
         <zen-text header="h6" bold color="white">Sitemap</zen-text>
         <ul class="list">
             <li>
-                <zen-link to="/" color="white" title="Home Link">
+                <zen-link light to="/" title="Home Link">
                     Home
                 </zen-link>
             </li>
             <li>
-                <zen-link to="/hiphop" color="white" title="Hip Hop Link">
+                <zen-link light to="/hiphop" title="Hip Hop Link">
                     Hip Hop
                 </zen-link>
             </li>
             <li>
-                <zen-link to="/code" color="white" title="Code Link">
+                <zen-link light to="/code" title="Code Link">
                     Code
                 </zen-link>
             </li>
@@ -21,6 +21,9 @@
     </zen-box>
 </template>
 <style scoped>
+.links p {
+    color: var(--color-1);
+}
 .links > h3 {
     margin-bottom: 0px;
 }
@@ -41,7 +44,7 @@
     padding: .25rem;
 }
 .links > .list > li > a:hover {
-    background-color: var(--primary-super-light);
-    color: var(--primary-super-dark)
+    background-color: var(--color-1);
+    color: var(--color-3);
 }
 </style>

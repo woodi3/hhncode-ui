@@ -1,6 +1,6 @@
 <template>
     <zen-box class="code">
-        <zen-box class="headline bg-primary-dark" h="600">
+        <zen-box class="headline" h="600">
             <zen-box class="quote absolute center text-center">
                 <h1 class="text-white">
                     {{quote.text}}
@@ -185,8 +185,9 @@ export default {
 </script>
 
 <style scoped>
-.code .headline {
+.code > .headline {
     overflow: hidden;
+    background-color: var(--twitter);
 }
 .code .headline > .img {
     width: 100%;

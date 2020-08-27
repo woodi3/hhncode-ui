@@ -7,11 +7,11 @@
 import { injectClass } from '../utils'
 
 const colors = {
-    primaryLight: `var(--primary-super-light)`,
-    accentLight: `var(--accent-rgb-light)`,
+    primaryLight: `var(--color-1)`,
+    accentLight: `var(--color-1)`,
     dangerLight: `var(--danger-rgb-light)`,
-    primary: `var(--primary-color)`,
-    accent: `var(--accent-color)`,
+    primary: `var(--primary)`,
+    accent: `var(--accent)`,
     white: `var(--white-color)`,
     danger: `var(--danger-color)`
 }

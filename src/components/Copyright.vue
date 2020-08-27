@@ -1,13 +1,13 @@
 <template>
-    <zen-flex class="copyright bg-black pl-6 pr-6" align="center" justify="space-between">
-        <zen-text color="lightgray" fontSize="sm">
+    <zen-flex class="copyright pl-6 pr-6" align="center" justify="space-between">
+        <zen-text class="text" fontSize="sm">
             &copy; {{copyright.year}} {{copyright.name}}. All rights reserved
         </zen-text>
-        <zen-button color="plain" size="sm" 
-            @click="open" 
-            @mouseover.native="setPrivacyPolicyHover(true)" 
-            @mouseleave.native="setPrivacyPolicyHover(false)">
-            <zen-text :color="privacyPolicyHover ? 'dark-primary' : 'gray'" fontSize="sm">Privacy Policy</zen-text>
+        <zen-button outline
+            light 
+            size="sm" 
+            @click="open">
+            Privacy Policy
         </zen-button>
         <zen-dialog class="text-black" :isOpen="privacyPolicyOpen" @close="close">
             <zen-dialog-header @close="close">
@@ -79,7 +79,10 @@ export default {
 
 <style scoped>
 .copyright {
-    /* background-color: #003c27; */
+    background-color: var(--color-4);
     height: 52px;
+}
+.copyright > .text {
+    color: var(--color-1);
 }
 </style>
