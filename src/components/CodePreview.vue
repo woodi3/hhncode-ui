@@ -5,7 +5,7 @@
         ml="auto"
         mr="auto"
         :h="mobile ? '1150px' : '1000px'">
-        <zen-flex class="action-bar brtc bg-primary pl-2" 
+        <zen-flex class="action-bar brtc pl-2" 
             align="center">
             <zen-box class="action-circle"></zen-box>
             <zen-box class="action-circle"></zen-box>
@@ -13,8 +13,7 @@
         </zen-flex>
         <zen-box class="side-bar brbl"
             position="absolute"
-            :w="mobile ? '50px' : '70px'"
-            bg="gray-dark">
+            :w="mobile ? '50px' : '70px'">
             <zen-flex class="side-bar-items" 
                 direction="column" 
                 align="center"
@@ -24,17 +23,17 @@
                     class="side-bar-item border-3x"
                     :pb="mobile ? '.75rem' : '1.5rem'"
                     pt="1.5rem"
-                    :class="[active(tab) ? [...activeClasses] : '', idx === tabs.length - 1 ? 'last' : '']"
+                    :class="{active: active(tab), last: idx===tabs.length - 1}"
                     @click.native="toggleTab(tab)">
-                    <zen-text :ref="`${tab.key}_tab`" 
+                    <zen-text :ref="`${tab.key}_tab`"
+                        class="tab-text"
                         bold
-                        align="center" 
-                        :color="active(tab) ? 'white' : 'gray'">
+                        align="center"
+                        :class="{active: active(tab)}">
                         {{tab.text}}
                     </zen-text>
                 </zen-box>
                 <zen-box class="text-center brbl view-more" 
-                    bg="primary" 
                     w="100%"
                     pt="1rem"
                     pb="1rem"
@@ -59,9 +58,8 @@
             <zen-box class="code-preview-header" 
                 f="0 0 25%"
                 width="60%">
-                <zen-text class="animated-text" 
-                    :header="mobile ? 'h4' : 'h2'" 
-                    color="white" 
+                <zen-text class="animated-text text-white" 
+                    :header="mobile ? 'h4' : 'h2'"
                     ref="codeHeaderText">
                     <span class="sr-only">{{animatedText}}</span>
                 </zen-text>
@@ -236,12 +234,23 @@ export default {
     width: 100%;
     height: 30px;
     z-index: 2;
+    background-color: var(--primary);
 }
 .code-preview > .side-bar {
     top: 29px;
     left: 0;
     height: calc(800px - 29px);
     z-index: 2;
+    background-color: var(--color-3);
+}
+.side-bar-item.active {
+    border-bottom: 1px solid var(--color-1);
+}
+.side-bar-item > .tab-text {
+    color: var(--color-2);
+}
+.side-bar-item > .tab-text.active {
+    color: var(--color-1);
 }
 .code-preview > .side-bar > .side-bar-items {
     height: 100%;
@@ -271,10 +280,13 @@ export default {
     transform: translateX(-50%);
     width: 100%;
 }
+.view-more {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--color-1);
+}
 .view-more:hover {
     cursor: pointer;
-    background-color: var(--primary-darker-color) !important;
-    border-color: var(--primary-darker-color) !important;
 }
 
 @media screen and (min-width: 800px) {

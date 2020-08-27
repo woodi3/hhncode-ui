@@ -3,7 +3,10 @@
         align="center" 
         justify="center">
         <zen-box f="0 0 50%">
-            <zen-button size="block" color="accent" class="buy-me-coffee-btn" @click="handleClick">
+            <zen-button primary
+                size="block"
+                class="buy-me-coffee-btn" 
+                @click="handleClick">
                 Buy Alex Coffee
             </zen-button>
         </zen-box>

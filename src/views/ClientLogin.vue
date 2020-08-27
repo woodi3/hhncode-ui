@@ -45,17 +45,18 @@
             </zen-box>
 
             <zen-flex class="actions" direction="row" justify="center">
-                <zen-button size="block" 
-                :disabled="disableLogin" 
-                @click="login"
-                :isLoading="isLoading">Login</zen-button>
+                <zen-button
+                    size="block" 
+                    :disabled="disableLogin" 
+                    @click="login"
+                    :isLoading="isLoading">Login</zen-button>
             </zen-flex>
 
             <zen-flex class="mt-3" align="center" justify="center">
                 <zen-text fontSize="sm" class="mr-1">
                     Not subscribed?
                 </zen-text>
-                <zen-link to="/new-account" fontSize="sm">Join us</zen-link>
+                <zen-link accent to="/new-account" fontSize="sm">Join us</zen-link>
             </zen-flex>
         </card>
     </zen-flex>

@@ -1,11 +1,11 @@
 <template>
     <zen-box class="subscribe text-center">
-      <zen-text header="h5" bold color="white">Get Updates</zen-text>
-      <zen-text italic color="white" class="pt-4">
+      <zen-text header="h5" bold>Get Updates</zen-text>
+      <zen-text italic class="pt-4">
           Subscribe to the newsletter to receive updates and
           special announcements
       </zen-text>
-      <zen-input class="email bg-primary-dark border-color-light mt-4"
+      <zen-input class="input email mt-4"
           type="email"
           name="subscribe-email" 
           placeholder="Email Address"
@@ -17,7 +17,7 @@
           :disabled="subscribing"
           @input="typing('email')" />
       <zen-flex class="mt-4">
-          <zen-input class="first-name bg-primary-dark border-color-light" 
+          <zen-input class="input first-name" 
             name="subscribe-first-name"
             placeholder="First Name" 
             variant="flushed"
@@ -28,8 +28,7 @@
             :disabled="subscribing"
             @input="typing('name')"
           />
-          <zen-button class="ml-4" 
-            color="accent"
+          <zen-button class="ml-4"
             :isLoading="subscribing"
             @click="subscribe">Subscribe</zen-button>
       </zen-flex>
@@ -144,31 +143,37 @@ export default {
 </script>
 
 <style scoped>
+.input {
+  background-color: var(--color-3);
+}
+.subscribe p {
+  color: var(--color-1);
+}
 .subscribe .email, .subscribe .first-name {
-    color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
 }
 .subscribe .email::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
   opacity: 1; /* Firefox */
 }
 
 .subscribe .email:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
 }
 
 .subscribe .email::-ms-input-placeholder { /* Microsoft Edge */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
 }
 .subscribe .first-name::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
   opacity: 1; /* Firefox */
 }
 
 .subscribe .first-name:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
 }
 
 .subscribe .first-name::-ms-input-placeholder { /* Microsoft Edge */
-  color: var(--gray-lighter-color) !important;
+  color: var(--color-1) !important;
 }
 </style>

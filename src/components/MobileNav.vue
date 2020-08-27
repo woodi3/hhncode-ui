@@ -11,8 +11,7 @@
         </zen-box>
         <zen-box f="0 0 25%" class="search-container">
             <zen-button v-if="!hideSearch"
-                class="ml-1 mr-1" 
-                color="plain-primary" 
+                class="ml-1 mr-1"
                 aria-label="Search button"
                 @click="searchClicked">
                 <span class="sr-only">Search</span>

@@ -1,6 +1,6 @@
 <template>
     <zen-link class="nav-item ml-1 mr-1" 
-        :class="{active: active, primary: !accent && active, accent: accent, 'text-primary': !accent && active, 'text-accent': accent}" 
+        :class="{active: active, 'text-primary': primary}" 
         :to="to" 
         @click="linkClicked">
         <span v-if="icon">
@@ -33,7 +33,7 @@ export default {
         icon: {
             type: Array,
         },
-        accent: {
+        primary: {
             type: Boolean,
         },
     },
@@ -53,10 +53,13 @@ export default {
 .nav-item .label {
     letter-spacing: 1px;
 }
-.nav-item.primary:hover, .nav-item.active.primary {
-    background-color: var(--primary-super-light);
+.nav-item:hover, .nav-item.active {
+    border-bottom-color: var(--color-4);
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    color: var(--color-4);
 }
-.nav-item.accent:hover, .nav-item.active.accent {
-    background-color: var(--accent-rgb-light);
+.nav-item.text-primary:hover, .nav-item.text-primary.active {
+    border-bottom-color: var(--primary);
 }
 </style>

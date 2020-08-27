@@ -86,6 +86,7 @@
 
             <zen-box v-if="showInputs" class="submit-container">
                 <zen-button class="submit-btn" 
+                    primary
                     size="block"
                     :isLoading="submitting" 
                     :disabled="invalid || invalidUser || submitting"
@@ -424,7 +425,7 @@ input[type=number].quantity-input {
 
 .coffee-quantity {
     background-color: var(--primary-super-light);
-    border-color: var(--primary-color);
+    border-color: var(--primary);
     border-style: solid;
     border-width: 1px;
 }
@@ -435,8 +436,8 @@ input[type=number].quantity-input {
     border-radius: 50%;
 }
 .amount.active {
-    background-color: var(--primary-color);
-    color: var(--white-color);
+    background-color: var(--primary);
+    color: var(--white-color) !important /* hack */;
 }
 .submit-container {
     position: fixed;

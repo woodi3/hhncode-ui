@@ -37,13 +37,14 @@
             <author-tag />
             
             <zen-box class="comments">
-                <zen-flex v-if="hideTextarea"
-                    class="comment-hider border-primary border-2x p-6 mb-4" 
-                    justify="center"
-                    @click.native="toggleTextarea">
-                    <zen-text color="primary" bold>
+                <zen-flex justify="center p-6 mb-4">
+                    <zen-button v-if="hideTextarea"
+                        outline
+                        size="block"
+                        class="comment-hider" 
+                        @click="toggleTextarea">
                         {{comments.length > 0 ? 'Write a response' : 'Write the first response'}}
-                    </zen-text>
+                    </zen-button>
                 </zen-flex>
 
                 <zen-textarea v-if="!hideTextarea"
@@ -648,8 +649,10 @@ export default {
     /* max-height: 380px; */
     margin-top: calc(var(--spacing-rem) * 14);
 }
-.comment-hider:hover {
-    cursor: pointer;
+.comment-hider {
+    height: 80px;
+    font-weight: bold;
+    font-size: calc(var(--font-size) * 1.05);
 }
 .sort-order-items {
     flex: 0 0 60%;

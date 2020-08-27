@@ -63,7 +63,7 @@ export default {
                 icon: ['fas', 'user'],
                 to: '/account-settings',
                 authCheck: true,
-                accent: true,
+                primary: true,
                 end: true,
             },
         ]

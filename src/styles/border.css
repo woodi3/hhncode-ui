@@ -33,10 +33,10 @@
     border-color: var(--gray-lighter-color) !important;
 }
 .focus-border-color-accent:focus:not(:read-only):not([aria-invalid="true"]) {
-    border-color: var(--accent-color) !important;
+    border-color: var(--accent) !important;
 }
 .focus-border-color-primary:focus:not(:read-only):not([aria-invalid="true"]) {
-    border-color: var(--primary-color) !important;
+    border-color: var(--color-4) !important;
 }
 
 .border-radius-md, .br-md {
