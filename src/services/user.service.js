@@ -82,8 +82,8 @@ export class UserService {
         return data.success
     }
 
-    async charge() {
-        const { data } = await this.api.get('user/charge')
+    async charge(quantity) {
+        const { data } = await this.api.post('user/charge', quantity)
         return data
     }
 

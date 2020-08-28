@@ -2,26 +2,31 @@
     <zen-flex class="coffee pt-10 pb-10" 
         align="center" 
         justify="center">
-        <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" 
-            alt="Buy Me A Coffee"
-            title="Buy Me a Coffee :)"
-            @click="handleClick">
-
-        <stripe-dialog header="Buy me coffee" 
+        <zen-box f="0 0 50%">
+            <zen-button primary
+                size="block"
+                class="buy-me-coffee-btn" 
+                @click="handleClick">
+                Buy Alex Coffee
+            </zen-button>
+        </zen-box>
+            
+        <stripe-bottom-sheet 
+            header="Buy Alex a coffee" 
             :isOpen="stripeOpen" 
             :confirmText="'$3.99'"
             @close="close"
-            @confirm="confirm">
-        </stripe-dialog>
+            @confirm="confirm"
+        />
     </zen-flex>
 </template>
 
 <script>
-import StripeDialog from './StripeDialog'
+import StripeBottomSheet from './StripeBottomSheet'
 
 export default {
     components: {
-        StripeDialog,
+        StripeBottomSheet,
     },
     data () {
         return {
@@ -38,7 +43,6 @@ export default {
         },
         confirm () {
             this.close()
-            console.log('Confirm clicked');
         }
     }
 }
@@ -48,11 +52,10 @@ export default {
 .coffee {
     text-decoration: none;
 }
-.coffee > img {
-    height: 41px !important;
-    width: 174px !important;
-}
-.coffee > img:hover {
-    cursor: pointer;
+
+.buy-me-coffee-btn {
+    height: 80px;
+    font-weight: bold;
+    font-size: calc(var(--font-size) * 1.05);
 }
 </style>

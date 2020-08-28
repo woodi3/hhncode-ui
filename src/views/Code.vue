@@ -1,6 +1,6 @@
 <template>
     <zen-box class="code">
-        <zen-box class="headline bg-primary-dark" h="600">
+        <zen-box class="headline" h="600">
             <zen-box class="quote absolute center text-center">
                 <h1 class="text-white">
                     {{quote.text}}
@@ -30,6 +30,7 @@
 <script>
 import FilterPosts from '../components/FilterPosts'
 import RippleBackground from '../components/RippleBackground'
+import { HIDE_FOOTER_KEY } from '../store/nav'
 
 // minimum search characters
 const MIN_SEARCH = 2
@@ -69,7 +70,11 @@ export default {
         }
     },
     mounted () {
+        this.hideFooter()
         this.load()
+    },
+    beforeDestroy () {
+        this.showFooter()
     },
     computed: {
         filteredPosts () {
@@ -92,6 +97,12 @@ export default {
         }
     },
     methods: {
+        hideFooter () {
+            this.$store.dispatch(HIDE_FOOTER_KEY, true)
+        },
+        showFooter () {
+            this.$store.dispatch(HIDE_FOOTER_KEY, false)  
+        },
         toggleTag (tag) {
             // find tag
             const idx = this.getIdx(tag)
@@ -145,7 +156,7 @@ export default {
             const search = this.searchVal.toLowerCase()
             if (search.length > 0) {
                 return posts.filter(p => 
-                    (p.postTitle.toLowerCase().indexOf(search) > -1 )
+                    (p.title.toLowerCase().indexOf(search) > -1 )
                 )
             }
             return posts
@@ -174,8 +185,9 @@ export default {
 </script>
 
 <style scoped>
-.code .headline {
+.code > .headline {
     overflow: hidden;
+    background-color: var(--twitter);
 }
 .code .headline > .img {
     width: 100%;
@@ -183,8 +195,6 @@ export default {
 }
 .code > .posts {
     width: 100%;
-    max-height: 500px;
-    overflow-y: auto;
 }
 .quote > h1 {
     font-size: 64px;

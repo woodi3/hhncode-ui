@@ -1,7 +1,7 @@
 import axios from 'axios'
+import environment from '../../environment'
 
-const IS_DEV = true
-const BASE_URL = IS_DEV ? `http://localhost:3000/api/` : `https://www.hhncode.com/api`
+const BASE_URL = environment.BASE_API_URL
 const TIMEOUT = 3000
 const DEFAULT_POST_HEADERS = {
     headers: {

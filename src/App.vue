@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <app-loader v-if="loading"/>
-    <template v-else-if="error">
+    <!-- <app-loader v-if="loading"/> -->
+    <vinyl-loader centerScreen size="lg" :loading="loading" />
+    <template v-if="error">
       <h3>Some error</h3>
     </template>
-    <template v-else>
+    <template v-else-if="!loading">
       <client-nav v-if="!hideNav && !isAdmin && !mobile" class="hide-on-mobile"/>
-      <zen-box v-if="!isAdmin && !mobile" mt="84px" class="hide-on-mobile">
+      <zen-box v-if="!isAdmin && !mobile" class="hide-on-mobile">
         <transition name="fade">
           <router-view />
         </transition>
@@ -46,7 +47,8 @@ import Nav from './components/Nav'
 import MobileNav from './components/MobileNav'
 import DrawerNav from './components/DrawerNav'
 import FooterComponent from './components/FooterComponent'
-import AppLoader from './components/AppLoader'
+import VinylLoader from './components/VinylLoader'
+// import AppLoader from './components/AppLoader'
 
 // import MusicPlayer from './components/MusicPlayer'
 
@@ -71,7 +73,8 @@ export default {
     MobileNav,
     DrawerNav,
     FooterComponent,
-    AppLoader,
+    VinylLoader,
+    // AppLoader,
     // MusicPlayer,
   },
   data () {
@@ -180,7 +183,7 @@ export default {
         
         this.$store.dispatch(IS_AUTHENTICATED_KEY, isAuthenticated)
       } catch (err) {
-        //console.log(err)
+        this.$store.dispatch(IS_AUTHENTICATED_KEY, false)
       }
     },
     async loadFeatures () {

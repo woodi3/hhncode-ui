@@ -35,3 +35,9 @@
     clip-path: inset(50%);
     border: 0;
 }
+.align-center {
+    align-items: center;
+}
+.align-self-center {
+    align-self: center;
+}

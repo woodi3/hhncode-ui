@@ -1,12 +1,12 @@
 <template>
     <footer class="footer">
-      <divider mt="32px" mb="32px"/>
+      <!-- <divider mt="32px" mb="32px"/> -->
       <zen-box class="buy-coffee text-center mt-8 mb-8">
         <buy-me-coffee />
       </zen-box>
       <zen-flex align="center" 
         wrap="wrap"
-        class="bg-primary-dark pl-6 pr-6 pt-3 pb-6">
+        class="sitemap-subscribe pl-6 pr-6 pt-3 pb-6">
         
         <zen-box f="0 0 50%" responsive>
           <sitemap />
@@ -49,3 +49,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.sitemap-subscribe {
+  background-color: var(--color-3);
+  color: var(--color-1);
+}
+</style>

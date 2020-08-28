@@ -13,10 +13,6 @@ export default {
             type: String,
             default: "md"
         },
-        color: {
-            type: String,
-            default: ""
-        },
         bold: {
             type: Boolean
         },
@@ -38,6 +34,10 @@ export default {
             type: String,
             default: '',
         },
+        lineHeight: {
+            type: String,
+            default: '',
+        },
         // hoverColor: {
         //     type: String,
         //     default: ''
@@ -51,46 +51,7 @@ export default {
     mounted () {
         this.className = injectClass(this.customStyles)
     },
-    methods: {
-        getColor(key) {
-            switch (key.toLowerCase()) {
-                case `primary`:
-                    return {
-                        class: `text-primary`
-                    }
-                case `dark-primary`:
-                    return {
-                        class: `text-dark-primary`
-                    }
-                case `accent`:
-                    return {
-                        class: `text-accent`
-                    }
-                case `danger`:
-                    return {
-                        class: `text-danger`
-                    }
-                case `gray`:
-                case `grey`:
-                    return {
-                        class: `text-gray`
-                    }
-                case `dark-gray`:
-                case `dark-grey`:
-                    return {
-                        class: `text-dark-gray`
-                    }
-                default:
-                    return {
-                        color: key === '' ? '' : `${key.toLowerCase()} !important`
-                    }
-            }
-        }
-    },
     computed: {
-        textColor () {
-            return this.getColor(this.color)
-        },
         // textHoverColor () {
         //     return this.getColor(this.hoverColor)
         // },
@@ -118,22 +79,20 @@ export default {
             }
         },
         customStyles () {
-            const textColor = this.textColor.color ? this.textColor : {}
             const fontSize = this.textFontSize.fontSize ? this.textFontSize : {}
             return {
-                ...textColor,
                 ...fontSize,
                 fontWeight: this.bold ? 'bold' : '',
                 fontStyle: this.italic ? 'italic' : '',
                 textAlign: this.align ? this.align : '',
                 textTransform: this.transform,
                 letterSpacing: this.letterSpacing,
+                lineHeight: this.lineHeight,
             }
         },
         classes () {
             return [
                 'zen-text',
-                this.textColor.class ? this.textColor.class : '',
                 this.textFontSize.class ? this.textFontSize.class : '',
                 this.className,
                 this.header.toLowerCase(),

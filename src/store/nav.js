@@ -56,14 +56,14 @@ export default {
             },
             {
                 label: 'Code',
-                to: '/tutorials',
+                to: '/code',
             },
             {
                 label: 'Account',
                 icon: ['fas', 'user'],
                 to: '/account-settings',
                 authCheck: true,
-                accent: true,
+                primary: true,
                 end: true,
             },
         ]

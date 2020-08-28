@@ -25,6 +25,8 @@ import {
   faSquare,
   faCheck,
   faPlus,
+  faChevronLeft,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faBookmark as farBookmark, faSquare as farSquare } from '@fortawesome/free-regular-svg-icons'
@@ -34,7 +36,6 @@ import ZenBox from './components/ZenBox'
 import ZenGrid from './components/ZenGrid'
 import ZenFlex from './components/ZenFlex'
 import ZenSpinner from './components/ZenSpinner'
-import ZenTable from './components/ZenTable/ZenTable'
 import ZenFormControl from './components/ZenFormControl/ZenFormControl'
 import ZenLabel from './components/ZenFormControl/ZenInputLabel'
 import ZenInput from './components/ZenFormControl/ZenInput'
@@ -98,7 +99,6 @@ const Components = {
   ZenInputElement,
   ZenInputHelper,
   ZenSpinner,
-  ZenTable,
   ZenLabel,
   ZenTextarea,
   ZenText,
@@ -140,7 +140,9 @@ library.add([
   faCheckSquare,
   faSquare,
   faCheck,
-  faPlus
+  faPlus,
+  faChevronRight,
+  faChevronLeft
 ], [
   faTwitter, 
   faInstagram
