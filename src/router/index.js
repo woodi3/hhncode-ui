@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import routeDefs, {ADMIN, DETAIL, BASE_TITLE } from './routes'
 import { HIDE_NAV_KEY, CURRENT_ROUTE_KEY, LAST_ROUTE_KEY } from '../store/nav'
 import store from '../store'
+import NotFoundRoute from '../views/404.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,12 @@ routes.push(rootRoute)
 Object.keys(routeDefs).forEach(routeKey => {
   routes.push(routeDefs[routeKey])
 })
+
+const notFoundRoute = {
+  path: '/*',
+  component: NotFoundRoute
+}
+routes.push(notFoundRoute)
 
 // create the router
 const router = new VueRouter({
