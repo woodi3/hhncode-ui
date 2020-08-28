@@ -25,6 +25,7 @@ Object.keys(routeDefs).forEach(routeKey => {
 
 const notFoundRoute = {
   path: '/*',
+  name: '404',
   component: NotFoundRoute
 }
 routes.push(notFoundRoute)
