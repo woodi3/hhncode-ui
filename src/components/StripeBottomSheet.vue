@@ -41,6 +41,9 @@
                     </zen-button>
                 </zen-box>
             </zen-flex>
+            <zen-flex v-if="!showInputs" class="instructions mt-6" justify="center" align="center">
+                <zen-text header="h5">Select the amount of coffee.</zen-text>
+            </zen-flex>
             <zen-flex v-if="showInputs">
                 <zen-box f="0 0 50%" mt=".75rem" mb=".75rem">
                     <zen-input v-model="user.name"
@@ -405,6 +408,9 @@ export default {
 </script>
 
 <style scoped>
+.instructions {
+    height: 200px;
+}
 .coffee-cup > img {
     width: 100%;
     height: 100%;
