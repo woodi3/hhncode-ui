@@ -20,7 +20,8 @@
                 justify="center">
                 <zen-box f="0 0 25%" class="coffee-cup">
                     <!-- COFFEE IMG -->
-                    <img src="https://via.placeholder.com/250" />
+                    <!-- <img src="https://via.placeholder.com/250" /> -->
+                    <coffee-cup />
                 </zen-box>
                 <zen-box f="0 0 15%" class="times text-grey">
                     <span class="sr-only">per</span>
@@ -126,6 +127,7 @@
 <script>
 import BottomSheet from './BottomSheet'
 import AppLoader from './AppLoader'
+import CoffeeCup from './CoffeeCup'
 import { hasValue, validEmail } from '../utils'
 import { loadStripe } from '@stripe/stripe-js'
 import environment from '../../environment'
@@ -216,7 +218,8 @@ export default {
     },
     components: {
         AppLoader,
-        BottomSheet
+        BottomSheet,
+        CoffeeCup,
     },
     computed: {
         loading () {
