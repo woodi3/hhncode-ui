@@ -20,7 +20,7 @@
                     variant="flushed" 
                     class="name mt-3 mb-1" 
                     name="user-emai" 
-                    placeholder="Enter your email to " 
+                    placeholder="Enter your email..." 
                     type="email"
                     :invalid="!emailIsValid"
                     :disabled="unsubscribing"
@@ -135,10 +135,6 @@ export default {
 </script>
 
 <style scoped>
-.unsubscribe {
-    /* height: 900px; */
-    margin-top: 25%;
-}
 h2 {
     margin: 0;
 }
