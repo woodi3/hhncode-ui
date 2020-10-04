@@ -1,9 +1,9 @@
 <template>
     <footer class="footer">
       <!-- <divider mt="32px" mb="32px"/> -->
-      <zen-box class="buy-coffee text-center mt-8 mb-8">
+      <!-- <zen-box class="buy-coffee text-center mt-8 mb-8">
         <buy-me-coffee />
-      </zen-box>
+      </zen-box> -->
       <zen-flex align="center" 
         wrap="wrap"
         class="sitemap-subscribe pl-6 pr-6 pt-3 pb-6">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import BuyMeCoffee from './BuyMeCoffee'
+// import BuyMeCoffee from './BuyMeCoffee'
 import Divider from './Divider'
 import Subscribe from './Subscribe'
 import Sitemap from './Sitemap'
@@ -33,7 +33,7 @@ import { DEVICE_ENUM } from '../services/resize.service'
 
 export default {
   components: {
-    BuyMeCoffee,
+    // BuyMeCoffee,
     Divider,
     Subscribe,
     Sitemap,
@@ -54,5 +54,6 @@ export default {
 .sitemap-subscribe {
   background-color: var(--color-3);
   color: var(--color-1);
+  margin-top: calc(var(--spacing-rem) * 16);
 }
 </style>

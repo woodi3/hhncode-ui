@@ -10,24 +10,24 @@
             </zen-text>
         </zen-box>
         <zen-flex class="icons">
-            <zen-box pl=".5rem" pr=".5rem" class="icon">
+            <zen-box pl=".25rem" pr=".25rem" class="icon">
                 <zen-button color="plain-gray" @click="twitter">
                     <span class="sr-only">Twitter</span>
                     <v-icon class="twitter" :icon="['fab', 'twitter']" size="lg"/>
                 </zen-button>
             </zen-box>
-            <zen-box pl=".5rem" pr=".5rem" class="icon">
+            <zen-box pl=".25rem" pr=".25rem" class="icon">
                 <zen-button color="plain-gray" @click="instagram">
                     <span class="sr-only">Instagram</span>
                     <v-icon class="instagram" :icon="['fab', 'instagram']" size="lg"/>
                 </zen-button>
             </zen-box>
-            <zen-box pl=".5rem" pr=".5rem" class="icon" v-if="showBookmark">
+            <!-- <zen-box pl=".5rem" pr=".5rem" class="icon" v-if="showBookmark">
                 <zen-button color="plain" @click="toggleBookmark">
                     <span class="sr-only">{{bookmarked ? 'Remove Bookmark' : 'Bookmark'}}</span>
                     <v-icon :class="[bookmarked ? 'text-accent' : '']" :icon="[ bookmarked ? 'fas' : 'far', 'bookmark']" size="lg"/>
                 </zen-button>
-            </zen-box>
+            </zen-box> -->
         </zen-flex>
     </zen-flex>
 </template>
