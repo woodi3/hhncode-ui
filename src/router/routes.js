@@ -19,21 +19,21 @@ export const FEATURES = 'features'
 export const QUOTES = 'quotes'
 export const RECEIPTS = 'receipts'
 
-import AccountSettings from '../views/AccountSettings'
+// import AccountSettings from '../views/AccountSettings'
 import Admin from '../views/Admin'
 import AdminDetail from '../views/AdminDetail'
 import AdminLogin from '../views/AdminLogin'
 import AdminPosts from '../views/AdminPosts'
 import AdminTags from '../views/AdminTags'
 import AdminTutorials from '../views/AdminTutorials'
-import ClientLogin from '../views/ClientLogin'
+// import ClientLogin from '../views/ClientLogin'
 import Unsubscribe from '../views/Unsubscribe'
 import Create from '../views/Create'
 import Dashboard from '../views/Dashboard'
 import Detail from '../views/Detail'
 import Hiphop from '../views/Hiphop'
 import Home from '../views/Home'
-import NewAccount from '../views/NewAccount'
+// import NewAccount from '../views/NewAccount'
 import Code from '../views/Code'
 import Users from '../views/Users'
 import Search from '../views/Search'
@@ -82,30 +82,30 @@ const routes = {
             setTitleOnLoad: true,
         },
     },
-    [`${ACCOUNT_SETTINGS}`]: {
-        name: ACCOUNT_SETTINGS,
-        path: `/${ACCOUNT_SETTINGS}`,
-        component: AccountSettings,
-        meta: {
-            title: BASE_TITLE + ' | Account Settings'
-        },
-    },
-    [`${NEW_ACCOUNT}`]: {
-        name: NEW_ACCOUNT,
-        path: `/${NEW_ACCOUNT}`,
-        component: NewAccount,
-        meta: {
-            title: BASE_TITLE + ' | Join us'
-        },
-    },
-    [`${LOGIN}`]: {
-        name: LOGIN,
-        path: `/${LOGIN}`,
-        component: ClientLogin,
-        meta: {
-            title: BASE_TITLE + ' | Login'
-        },
-    },
+    // [`${ACCOUNT_SETTINGS}`]: {
+    //     name: ACCOUNT_SETTINGS,
+    //     path: `/${ACCOUNT_SETTINGS}`,
+    //     component: AccountSettings,
+    //     meta: {
+    //         title: BASE_TITLE + ' | Account Settings'
+    //     },
+    // },
+    // [`${NEW_ACCOUNT}`]: {
+    //     name: NEW_ACCOUNT,
+    //     path: `/${NEW_ACCOUNT}`,
+    //     component: NewAccount,
+    //     meta: {
+    //         title: BASE_TITLE + ' | Join us'
+    //     },
+    // },
+    // [`${LOGIN}`]: {
+    //     name: LOGIN,
+    //     path: `/${LOGIN}`,
+    //     component: ClientLogin,
+    //     meta: {
+    //         title: BASE_TITLE + ' | Login'
+    //     },
+    // },
     [`${UNSUBSCRIBE}`]: {
         path: `/${UNSUBSCRIBE}`,
         name: UNSUBSCRIBE,

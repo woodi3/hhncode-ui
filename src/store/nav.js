@@ -58,14 +58,14 @@ export default {
                 label: 'Code',
                 to: '/code',
             },
-            {
-                label: 'Account',
-                icon: ['fas', 'user'],
-                to: '/account-settings',
-                authCheck: true,
-                primary: true,
-                end: true,
-            },
+            // {
+            //     label: 'Account',
+            //     icon: ['fas', 'user'],
+            //     to: '/account-settings',
+            //     authCheck: true,
+            //     primary: true,
+            //     end: true,
+            // },
         ]
     },
     mutations: {

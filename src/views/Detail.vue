@@ -36,7 +36,7 @@
 
             <author-tag />
             
-            <zen-box class="comments">
+            <!-- <zen-box class="comments">
                 <zen-flex justify="center p-6 mb-4">
                     <zen-button v-if="hideTextarea"
                         outline
@@ -107,7 +107,7 @@
                         @report="setCommentForReport"
                         />
                 </zen-box>
-            </zen-box>
+            </zen-box> -->
         </zen-box>
         <zen-dialog :isOpen="showReport" @close="setReportModalVisibility(false)">
             <zen-dialog-header @close="setReportModalVisibility(false)">
@@ -169,7 +169,7 @@ import AppLoader from '../components/AppLoader'
 import Author from '../components/Author'
 import AuthorTag from '../components/AuthorTag'
 import Badge from '../components/Badge'
-import Comment from '../components/Comment'
+// import Comment from '../components/Comment'
 
 import debounce from 'lodash.debounce'
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html'; 
@@ -216,7 +216,7 @@ export default {
         Author,
         AuthorTag,
         Badge,
-        Comment,
+        // Comment,
     },
     props: {
         t: { //title
